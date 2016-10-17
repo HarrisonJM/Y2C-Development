@@ -4,16 +4,11 @@
 
 #include <string>
 
+#include "userComment.h"
+
 using namespace std;
 
-class UserComment
-{
-private:
-	string comment;
-	int timesRead;
-	int thumbsUp;
 
-public:
 	UserComment::UserComment(string sentComment)
 	{
 		comment = sentComment;
@@ -30,4 +25,3 @@ public:
 	{
 		timesRead++;
 	}
-};

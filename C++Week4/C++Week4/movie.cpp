@@ -7,38 +7,30 @@
 
 #include "userRating.h"
 #include "userComment.h"
+#include "movie.h"
 
 using namespace std;
 
-class Movie
+Movie::Movie(string givenTitle, int givenYear, string givenDesc, string givenGenre)
 {
-private:
-	string title;
-	int year;
-	string desc;
-	string genre;
-	vector<UserRating> ratings;
-	vector<UserComment> comments;
+	title = givenTitle;
+	year = givenYear;
+	desc = givenDesc;
+	genre = givenGenre;
+}
 
-public:
-	Movie::Movie(string givenTitle, int givenYear, string givenDesc, string givenGenre)
-	{
-		title = givenTitle;
-		year = givenYear;
-		desc = givenDesc;
-		genre = givenGenre;
-	}
+UserRating Movie::AddMovieRating(int rating)
+{
+	UserRating tempUR(rating);
+	ratings.push_back(tempUR);
 
-	void Movie::AddMovieRating(int rating)
-	{
-		UserRating tempUR(rating);
-		ratings.push_back(tempUR);
-	}
+	return tempUR;
+}
 
-	void Movie::AddComment(string comment)
-	{
-		UserComment tempComm(comment);
-		comments.push_back(tempComm);
-	}
+UserComment Movie::AddComment(string comment)
+{
+	UserComment tempComm(comment);
+	comments.push_back(tempComm);
 
-};
+	return tempComm;
+}
