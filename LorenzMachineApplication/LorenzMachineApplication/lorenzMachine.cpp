@@ -1,30 +1,47 @@
 #include "stdafx.h"
 #include "lorenzMachine.h"
 
-lorenzMachine::lorenzMachine(wheelGroup chi, wheelGroup psi, wheel m37, wheel m61)
+lorenzMachine::lorenzMachine(wheelGroup chiwheels, wheelGroup psiwheels, wheel m37wheel, wheel m61wheel)
 {
-	// implementation code should be added here
+	chi = chiwheels;
+	psi = psiwheels;
+	m37 = m37wheel;
+	m61 = m61wheel;
 }
 
-int lorenzMachine::encryptChar(int baudotChar)
+int lorenzMachine::encryptChar(int baudtoChar)
 {
-	// implementation code should be added here
-	// you should also change the return statement
-	// where appropriate
+	int key = makeKey();
+	int xor = baudtoChar ^ key;
 
-	return 0;
+	return xor;
 }
 
 void lorenzMachine::rotateWheels()
 {
-	// implementation code should be added here
+	chi.rotate();
+
+	if (m37.getCurrentPin() == '1')
+	{
+		psi.rotate();
+	}
+
+	if (m61.getCurrentPin() == '1')
+	{
+		m37.rotate();
+	}
+
+	m61.rotate();
 }
 
 int lorenzMachine::makeKey()
 {
-	// implementation code should be added here
-	// you should also change the return statement
-	// where appropriate
+	int chiw, psiw, key;
 
-	return 0;
+	chiw = chi.getCurrentPins();
+	psiw = psi.getCurrentPins();
+
+	key = chiw ^ psiw;
+
+	return key;
 }

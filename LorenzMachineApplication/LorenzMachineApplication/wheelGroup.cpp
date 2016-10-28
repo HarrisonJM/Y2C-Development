@@ -1,21 +1,43 @@
 #include "stdafx.h"
 #include "wheelGroup.h"
 
+#include <sstream>
+#include <iostream>
+
 wheelGroup::wheelGroup(wheel wheel1, wheel wheel2, wheel wheel3, wheel wheel4, wheel wheel5)
 {
-	// implementation code should be added here
+	wheels.push_back(wheel1);
+	wheels.push_back(wheel2);
+	wheels.push_back(wheel3);
+	wheels.push_back(wheel4);
+	wheels.push_back(wheel5);
 }
 
 void wheelGroup::rotate()
 {
-	// implementation code should be added here
+	for (int i = 0; i < 5; ++i)
+	{
+		wheels[i].rotate();
+	}
 }
 
 int wheelGroup::getCurrentPins()
 {
-	// implementation code should be added here
-	// you should also change the return statement
-	// where appropriate
+	int pins[5];
+	int ret;
+	stringstream strstr;
 
-	return 0;
+	for (int i = 0; i < 5; ++i)
+	{
+		pins[i] = wheels[i].getCurrentPin();
+	}
+
+	for (unsigned i = 0; i < sizeof pins / sizeof pins[0]; ++i)
+	{
+		strstr << pins[i];
+	}
+
+	strstr >> ret;
+
+	return ret;
 }

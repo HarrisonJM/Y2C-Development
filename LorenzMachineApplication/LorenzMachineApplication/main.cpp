@@ -5,6 +5,7 @@ using namespace std;
 
 #include "lorenzMachine.h"
 #include "teleprinter.h"
+#include "wheel.h"
 
 // construct a lorenz machine object using a pinsettings file
 lorenzMachine constructLorenzMachine();
@@ -14,6 +15,9 @@ int main()
 	lorenzMachine encryptionDevice = constructLorenzMachine();
 	teleprinter keyboard(encryptionDevice);
 	string encryptedMessage = keyboard.encryptMessage("HELLO WORLD");
+
+	cout << "ENCRYPTED MESSAGE: " << encryptedMessage << endl;
+
 	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
 
 	return 0;

@@ -3,29 +3,33 @@
 
 #include <sstream>
 
-wheel::wheel(string pinSet, int pinSetting)
+wheel::wheel(string pinSet, int pinSettingPar)
 {
-	// implementation code should be added here
+	//Fills wheel with pin settings
 	int number;
+	pinSetting = pinSettingPar;
 
-	std::stringstream tempss(pinSet);
-
-	while (tempss >> number)
+	for (int i = 0; i < pinSet.length(); ++i)
 	{
+		number = pinSet[i] - '0';
 		pins.push_back(number);
 	}
 }
 
-void wheel::rotate()
+void wheel::rotate() //increments pin index
 {
-	// implementation code should be added here
+	if (pinSetting > pins.size() - 1)
+	{
+		pinSetting = 0;
+	}
+	else
+	{
+		pinSetting++;
+	}
 }
 
-int wheel::getCurrentPin()
-{
-	// implementation code should be added here
-	// you should also change the return statement
-	// where appropriate
 
-	return 0;
+int wheel::getCurrentPin() //returns pin at pin setting
+{
+	return pins[pinSetting];
 }
