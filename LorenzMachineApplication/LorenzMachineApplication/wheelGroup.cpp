@@ -24,7 +24,7 @@ void wheelGroup::rotate()
 int wheelGroup::getCurrentPins()
 {
 	int pins[5];
-	int ret;
+	int ret = 0, num, rem, base = 1;
 	stringstream strstr;
 
 	for (int i = 0; i < 5; ++i)
@@ -37,7 +37,15 @@ int wheelGroup::getCurrentPins()
 		strstr << pins[i];
 	}
 
-	strstr >> ret;
+	strstr >> num;
+
+	while (num > 0)
+	{
+		rem = num % 10;
+		ret = ret + rem * base;
+		num = num / 10;
+		base = base * 2;
+	}
 
 	return ret;
 }

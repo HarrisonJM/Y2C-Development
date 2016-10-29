@@ -14,6 +14,8 @@ int lorenzMachine::encryptChar(int baudtoChar)
 	int key = makeKey();
 	int xor = baudtoChar ^ key;
 
+	rotateWheels();
+
 	return xor;
 }
 

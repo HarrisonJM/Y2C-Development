@@ -12,11 +12,23 @@ lorenzMachine constructLorenzMachine();
 
 int main()
 {
+	string phrase;
+
 	lorenzMachine encryptionDevice = constructLorenzMachine();
 	teleprinter keyboard(encryptionDevice);
-	string encryptedMessage = keyboard.encryptMessage("HELLO WORLD");
+
+	cout << "Enter Phrase to encrypt/decrypt: ";
+	//cin >> phrase;
+	getline(cin, phrase);
+
+	string encryptedMessage = keyboard.encryptMessage(phrase);
+	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US"); //what's this for? Output is garbage; incorrect pin settings...
 
 	cout << "ENCRYPTED MESSAGE: " << encryptedMessage << endl;
+
+	std::cout << "Press ENTER to continue... " << flush;
+	std::cin.ignore(std::numeric_limits <std::streamsize> ::max(), '\n');
+	std::cin.ignore(std::numeric_limits <std::streamsize> ::max(), '\n');
 
 	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
 

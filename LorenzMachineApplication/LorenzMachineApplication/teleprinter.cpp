@@ -3,7 +3,7 @@
 
 teleprinter::teleprinter(lorenzMachine encryptionDevice)
 {
-	char c[] = { "*E-A SIU,DRJNFCKTZLWHYPQOBG.MXV!" };
+	char c[] = { "*E-A_SIU,DRJNFCKTZLWHYPQOBG.MXV!" };
 	
 	for (int i = 0b00000; i < 0b11111; ++i)
 	{
@@ -165,7 +165,7 @@ char teleprinter::getCharFromBaudot(int b)
 {
 	char c;
 
-	baudotToChar[b] = c;
+	c = baudotToChar[b];
 
 	//switch (b)
 	//{
@@ -273,18 +273,23 @@ char teleprinter::getCharFromBaudot(int b)
 string teleprinter::encryptMessage(string message)
 {
 	string encmessage;
+	encmessage.resize(message.length(), '.');
+
 	int baudot, xor;
 
 	encmessage.empty();
 
-	for (int i = 0; i < message.length() - 1; ++i)
+	for (int i = 0; i < message.length(); ++i)
 	{
-		baudot = getBaudotFromChar(message[i]); //get baudot number
+		
+		baudot = getBaudotFromChar(toupper(message[i])); //get baudot number
 
 		xor = encryptor.encryptChar(baudot);
 
 		encmessage[i] = getCharFromBaudot(xor);
 	}
+
+	encmessage[encmessage.length()] = EOF;
 
 	return encmessage;
 }
