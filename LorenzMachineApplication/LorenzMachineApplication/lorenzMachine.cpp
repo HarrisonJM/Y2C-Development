@@ -23,12 +23,12 @@ void lorenzMachine::rotateWheels()
 {
 	chi.rotate();
 
-	if (m37.getCurrentPin() == '1')
+	if (m37.getCurrentPin() == 1)
 	{
 		psi.rotate();
 	}
 
-	if (m61.getCurrentPin() == '1')
+	if (m61.getCurrentPin() == 1)
 	{
 		m37.rotate();
 	}

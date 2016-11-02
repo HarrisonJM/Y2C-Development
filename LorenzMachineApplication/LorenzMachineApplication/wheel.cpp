@@ -35,9 +35,7 @@ int wheel::getCurrentPin() //returns pin at pin setting
 	{
 		pinSetting = 0;
 	}
-	else
-	{
-		return pins[pinSetting];
-	}
+
+	return pins[pinSetting];
 
 }

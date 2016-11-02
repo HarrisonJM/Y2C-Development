@@ -22,12 +22,11 @@ int main()
 	getline(cin, phrase);
 
 	string encryptedMessage = keyboard.encryptMessage(phrase);
-	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US"); //what's this for? Output is garbage; incorrect pin settings...
+	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
 
 	cout << "ENCRYPTED MESSAGE: " << encryptedMessage << endl;
 
 	std::cout << "Press ENTER to continue... " << flush;
-	std::cin.ignore(std::numeric_limits <std::streamsize> ::max(), '\n');
 	std::cin.ignore(std::numeric_limits <std::streamsize> ::max(), '\n');
 
 	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
