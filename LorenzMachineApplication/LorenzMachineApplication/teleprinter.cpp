@@ -1,296 +1,99 @@
 #include "stdafx.h"
 #include "teleprinter.h"
+#include <map>
+using std::map;
 
-teleprinter::teleprinter(lorenzMachine encryptionDevice)
+teleprinter::teleprinter(lorenzMachine encryptor)
 {
-	char c[] = { "*E-A SIU,DRJNFCKTZLWHYPQOBG.MXV!" };
-	
-	for (int i = 0b00000; i < 0b11111; ++i)
-	{
-		charToBaudot[c[i]] = i;
-	}
+	this->encryptor = encryptor;
 
-	for (int i = 0b00000; i < 0b11111; ++i)
-	{
-		baudotToChar[i] = c[i];
-	}
+	charToBaudot['A'] = 0x03; // 00011
+	charToBaudot['B'] = 0x19; // 11001
+	charToBaudot['C'] = 0x0e; // 01110
+	charToBaudot['D'] = 0x09; // 01001
+	charToBaudot['E'] = 0x09; // 00001
+	charToBaudot['F'] = 0x0d; // 01101
+	charToBaudot['G'] = 0x1a; // 11010
+	charToBaudot['H'] = 0x14; // 10100
+	charToBaudot['I'] = 0x06; // 00110
+	charToBaudot['J'] = 0x0b; // 01011
+	charToBaudot['K'] = 0x0f; // 01111
+	charToBaudot['L'] = 0x12; // 10010
+	charToBaudot['M'] = 0x1c; // 11100
+	charToBaudot['N'] = 0x0c; // 01100
+	charToBaudot['O'] = 0x18; // 11000
+	charToBaudot['P'] = 0x16; // 10110
+	charToBaudot['Q'] = 0x17; // 10111
+	charToBaudot['R'] = 0x0a; // 01010
+	charToBaudot['S'] = 0x05; // 00101
+	charToBaudot['T'] = 0x10; // 10000
+	charToBaudot['U'] = 0x07; // 00111
+	charToBaudot['V'] = 0x1e; // 11110
+	charToBaudot['W'] = 0x13; // 10011
+	charToBaudot['X'] = 0x1d; // 11101
+	charToBaudot['Y'] = 0x15; // 10101
+	charToBaudot['Z'] = 0x11; // 10001
+	charToBaudot[' '] = 0x04; // 00100 SPACE
+	charToBaudot['*'] = 0x00; // 00000 NULL
+	charToBaudot[','] = 0x08; // 01000 CR
+	charToBaudot['-'] = 0x02; // 00010 LF
+	charToBaudot['!'] = 0x1b; // 11011 Shift to figures
+	charToBaudot['.'] = 0x1f; // 11111 Shift to letters
 
-	encryptor = encryptionDevice;
-
-	/* Very long list */
-	/*
-	charToBaudot['*'] = 00000;
-	charToBaudot['E'] = 00001;
-	charToBaudot['-'] = 00010;
-	charToBaudot['A'] = 00011;
-	charToBaudot[' '] = 00100;
-	charToBaudot['S'] = 00101;
-	charToBaudot['I'] = 00110;
-	charToBaudot['U'] = 00111;
-	charToBaudot[','] = 01000;
-	charToBaudot['D'] = 01001;
-	charToBaudot['R'] = 01010;
-	charToBaudot['J'] = 01011;
-	charToBaudot['N'] = 01100;
-	charToBaudot['F'] = 01101;
-	charToBaudot['C'] = 01110;
-	charToBaudot['K'] = 01111;
-	charToBaudot['T'] = 10000;
-	charToBaudot['Z'] = 10001;
-	charToBaudot['L'] = 10010;
-	charToBaudot['W'] = 10011;
-	charToBaudot['H'] = 10100;
-	charToBaudot['Y'] = 10101;
-	charToBaudot['P'] = 10110;
-	charToBaudot['Q'] = 10111;
-	charToBaudot['O'] = 11000;
-	charToBaudot['B'] = 11001;
-	charToBaudot['G'] = 11010;
-	charToBaudot['!'] = 11011;
-	charToBaudot['M'] = 11100;
-	charToBaudot['X'] = 11101;		
-	charToBaudot['V'] = 11110;
-	charToBaudot['.'] = 11111;*/
+	baudotToChar[0x03] = 'A'; // 00011
+	baudotToChar[0x19] = 'B'; // 11001
+	baudotToChar[0x0e] = 'C'; // 01110
+	baudotToChar[0x09] = 'D'; // 01001
+	baudotToChar[0x01] = 'E'; // 00001
+	baudotToChar[0x0d] = 'F'; // 01101
+	baudotToChar[0x1a] = 'G'; // 11010
+	baudotToChar[0x14] = 'H'; // 10100
+	baudotToChar[0x06] = 'I'; // 00110
+	baudotToChar[0x0b] = 'J'; // 01011
+	baudotToChar[0x0f] = 'K'; // 01111
+	baudotToChar[0x12] = 'L'; // 10010
+	baudotToChar[0x1c] = 'M'; // 11100
+	baudotToChar[0x0c] = 'N'; // 01100
+	baudotToChar[0x18] = 'O'; // 11000
+	baudotToChar[0x16] = 'P'; // 10110
+	baudotToChar[0x17] = 'Q'; // 10111
+	baudotToChar[0x0a] = 'R'; // 01010
+	baudotToChar[0x05] = 'S'; // 00101
+	baudotToChar[0x10] = 'T'; // 10000
+	baudotToChar[0x07] = 'U'; // 00111
+	baudotToChar[0x1e] = 'V'; // 11110
+	baudotToChar[0x13] = 'W'; // 10011
+	baudotToChar[0x1d] = 'X'; // 11101
+	baudotToChar[0x15] = 'Y'; // 10101
+	baudotToChar[0x11] = 'Z'; // 10001
+	baudotToChar[0x04] = ' '; // 00100 SPACE
+	baudotToChar[0x00] = '*'; // 00000 NULL
+	baudotToChar[0x08] = ','; // 01000 CR
+	baudotToChar[0x02] = '-'; // 00010 LF
+	baudotToChar[0x1b] = '!'; // 11011 Shift to figures
+	baudotToChar[0x1f] = '.'; // 11111 Shift to letters
 }
 
 int teleprinter::getBaudotFromChar(char c)
 {
-	int baudot;
-
-	baudot = charToBaudot[c];
-
-	//switch (c)
-	//{
-	//case '*': // (NULL) *
-	//	baudot = 0b00000;
-	//	break;
-	//case ' ': //SPACE
-	//	baudot = 0b00100;
-	//	break;
-	//case 'Q': //Q
-	//	baudot = 0b10111;
-	//	break;
-	//case 'W': //W
-	//	baudot = 0b10011;
-	//	break;
-	//case 'E': //E
-	//	baudot = 0b00001;
-	//	break;
-	//case 'R': //R
-	//	baudot = 0b01010;
-	//	break;
-	//case 'T': //T
-	//	baudot = 0b10000;
-	//	break;
-	//case 'Y': //Y
-	//	baudot = 0b10101;
-	//	break;
-	//case 'U': //U
-	//	baudot = 0b00111;
-	//	break;
-	//case 'I': //I
-	//	baudot = 0b00110;
-	//	break;
-	//case 'O': //O
-	//	baudot = 0b11000;
-	//	break;
-	//case 'P': //P
-	//	baudot = 0b10110;
-	//	break;
-	//case 'A': //A
-	//	baudot = 0b00011;
-	//	break;
-	//case 'S': //S
-	//	baudot = 0b00101;
-	//	break;
-	//case 'D': //D
-	//	baudot = 0b01001;
-	//	break;
-	//case 'F': //F
-	//	baudot = 0b01101;
-	//	break;
-	//case 'G': //G
-	//	baudot = 0b11010;
-	//	break;
-	//case 'H': //H
-	//	baudot = 0b10100;
-	//	break;
-	//case 'J': //J
-	//	baudot = 0b01011;
-	//	break;
-	//case 'K': //K
-	//	baudot = 0b01111;
-	//	break;
-	//case 'L': //L
-	//	baudot = 0b10010;
-	//	break;
-	//case 'Z': //Z
-	//	baudot = 0b10001;
-	//	break;
-	//case 'X': //X
-	//	baudot = 0b11101;
-	//	break;
-	//case 'C': //C
-	//	baudot = 0b01110;
-	//	break;
-	//case 'V': //V
-	//	baudot = 0b11110;
-	//	break;
-	//case 'B': //B
-	//	baudot = 0b11001;
-	//	break;
-	//case 'N': //N
-	//	baudot = 0b01100;
-	//	break;
-	//case 'M': //M
-	//	baudot = 0b11100;
-	//	break;
-	//case ',': //(Carriage return) ,
-	//	baudot = 0b01000;
-	//	break;
-	//case '-': // (line feed) -
-	//	baudot = 0b00010;
-	//	break; 
-	//case '.': // (letter shift) .
-	//	baudot = 0b11011;
-	//	break;
-	//case '!': // (Figure Shift) !
-	//	baudot = 0b11111;
-	//	break;
-	//}
-
-	return baudot;
+	return charToBaudot[c];
 }
 
 char teleprinter::getCharFromBaudot(int b)
 {
-	char c;
-
-	c = baudotToChar[b];
-
-	//switch (b)
-	//{
-	//case 0b00000: // (NULL) *
-	//	c = '*';
-	//	break;
-	//case 0b00100: //SPACE
-	//	c = ' ';
-	//	break;
-	//case 0b10111: //Q
-	//	c = 'Q';
-	//	break;
-	//case 0b10011: //W
-	//	c = 'W';
-	//	break;
-	//case 0b00001: //E
-	//	c = 'E';
-	//	break;
-	//case 0b01010: //R
-	//	c = 'R';
-	//	break;
-	//case 0b10000: //T
-	//	c = 'T';
-	//	break;
-	//case 0b10101: //Y
-	//	c = 'Y';
-	//	break;
-	//case 0b00111: //U
-	//	c = 'U';
-	//	break;
-	//case 0b00110: //I
-	//	c = 'I';
-	//	break;
-	//case 0b11000: //O
-	//	c = 'O';
-	//	break;
-	//case 0b10110: //P
-	//	c = 'P';
-	//	break;
-	//case 0b00011: //A
-	//	c = 'A';
-	//	break;
-	//case 0b00101: //S
-	//	c = 'S';
-	//	break;
-	//case 0b01001: //D
-	//	c = 'D';
-	//	break;
-	//case 0b01101: //F
-	//	c = 'F';
-	//	break;
-	//case 0b11010: //G
-	//	c = 'G';
-	//	break;
-	//case 0b10100: //H
-	//	c = 'H';
-	//	break;
-	//case 0b01011: //J
-	//	c = 'J';
-	//	break;
-	//case 0b01111: //K
-	//	c = 'K';
-	//	break;
-	//case 0b10010: //L
-	//	c = 'L';
-	//	break;
-	//case 0b10001: //Z
-	//	c = 'Z';
-	//	break;
-	//case 0b11101: //X
-	//	c = 'X';
-	//	break;
-	//case 0b01110: //C
-	//	c = 'C';
-	//	break;
-	//case 0b11110: //V
-	//	c = 'V';
-	//	break;
-	//case 0b11001: //B
-	//	c = 'B';
-	//	break;
-	//case 0b01100: //N
-	//	c = 'N';
-	//	break;
-	//case 0b11100: //M
-	//	c = 'M';
-	//	break;
-	//case 0b01000: //(Carriage return) ,
-	//	c = ',';
-	//	break;
-	//case 0b00010: // (line feed) -
-	//	c = '-';
-	//	break;
-	//case 0b11011: // (letter shift) .
-	//	c = '.';
-	//	break;
-	//case 0b11111: // (Figure Shift) !
-	//	c = '!';
-	//	break;
-	//}
-
-	return c;
+	return baudotToChar[b];
 }
 
 string teleprinter::encryptMessage(string message)
 {
-	string encmessage;
-	encmessage.resize(message.length(), EOF);
-
-	int baudot, xor;
-
-	encmessage.empty();
-
-	for (int i = 0; i < message.length(); ++i)
+	string encMessage = "";
+	for(int i=0;i<message.size();i++)
 	{
-		
-		baudot = getBaudotFromChar(toupper(message[i])); //get baudot number
-
-		xor = encryptor.encryptChar(baudot);
-
-		encmessage[i] = getCharFromBaudot(xor);
+		int baudot = getBaudotFromChar(message[i]);
+		int encBaudot = encryptor.encryptChar(baudot);
+		int encChar = getBaudotFromChar(encBaudot);
+		encMessage.push_back(encChar);
 	}
 
-	encmessage[encmessage.length()] = EOF;
-
-	return encmessage;
+	return encMessage;
 }

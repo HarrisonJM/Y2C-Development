@@ -1,9 +1,6 @@
 #include "stdafx.h"
 #include "wheelGroup.h"
 
-#include <sstream>
-#include <iostream>
-
 wheelGroup::wheelGroup(wheel wheel1, wheel wheel2, wheel wheel3, wheel wheel4, wheel wheel5)
 {
 	wheels.push_back(wheel1);
@@ -15,7 +12,7 @@ wheelGroup::wheelGroup(wheel wheel1, wheel wheel2, wheel wheel3, wheel wheel4, w
 
 void wheelGroup::rotate()
 {
-	for (int i = 0; i < 5; ++i)
+	for(int i=0;i<wheels.size()-1;i++)
 	{
 		wheels[i].rotate();
 	}
@@ -23,29 +20,13 @@ void wheelGroup::rotate()
 
 int wheelGroup::getCurrentPins()
 {
-	int pins[5];
-	int ret = 0, num, rem, base = 1;
-	stringstream strstr;
-
-	for (int i = 0; i < 5; ++i)
+	int result = 0;
+	
+	for(int i=0;i<wheels.size();i++)
 	{
-		pins[i] = wheels[i].getCurrentPin();
+		result <<= 1;
+		result &= wheels[i].getCurrentPin();
 	}
 
-	for (unsigned i = 0; i < sizeof pins / sizeof pins[0]; ++i)
-	{
-		strstr << pins[i];
-	}
-
-	strstr >> num;
-
-	while (num > 0)
-	{
-		rem = num % 10;
-		ret = ret + rem * base;
-		num = num / 10;
-		base = base * 2;
-	}
-
-	return ret;
+	return result;
 }
