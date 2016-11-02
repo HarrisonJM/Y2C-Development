@@ -21,7 +21,8 @@ int main()
 
 	cout << "Enter Phrase to encrypt/decrypt: ";
 	//cin >> phrase;
-	getline(cin, phrase);
+	//getline(cin, phrase);
+	phrase = "HELLO WORLD";
 
 	string encryptedMessage = keyboard.encryptMessage(phrase);
 	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
@@ -30,8 +31,6 @@ int main()
 
 	std::cout << "Press ENTER to continue... " << flush;
 	std::cin.ignore(std::numeric_limits <std::streamsize> ::max(), '\n');
-
-	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
 
 	return 0;
 }

@@ -12,9 +12,10 @@ lorenzMachine::lorenzMachine(wheelGroup chiwheels, wheelGroup psiwheels, wheel m
 int lorenzMachine::encryptChar(int baudtoChar)
 {
 	int key = makeKey();
-	int xor = baudtoChar ^ key;
 
 	rotateWheels();
+
+	int xor = baudtoChar ^ key;
 
 	return xor;
 }

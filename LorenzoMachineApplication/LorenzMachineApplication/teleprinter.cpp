@@ -3,16 +3,24 @@
 
 teleprinter::teleprinter(lorenzMachine encryptionDevice)
 {
-	char c[] = { "*E-A SIU,DRJNFCKTZLWHYPQOBG.MXV!" };
+	/*char c[] = { "*E-A SIU,DRJNFCKTZLWHYPQOBG.MXV!" };*/
+	  char c[] = { "*E-A SIU,DRJNFCKTZLWHYPQOBG!MXV." };
 	
-	for (int i = 0b00000; i < 0b11111; ++i)
+	for (int i = 0b00000; i <= 0b11111; ++i)
 	{
 		charToBaudot[c[i]] = i;
 	}
 
-	for (int i = 0b00000; i < 0b11111; ++i)
+	for (int i = 0b00000; i <= 0b11111; ++i)
 	{
-		baudotToChar[i] = c[i];
+		if (i == 31)
+		{
+			baudotToChar[i] = '.';
+		}
+		else
+		{
+			baudotToChar[i] = c[i];
+		}
 	}
 
 	encryptor = encryptionDevice;

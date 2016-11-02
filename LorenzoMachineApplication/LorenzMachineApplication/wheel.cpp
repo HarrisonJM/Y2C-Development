@@ -31,11 +31,5 @@ void wheel::rotate() //increments pin index
 
 int wheel::getCurrentPin() //returns pin at pin setting
 {
-	if (pinSetting > pins.size() - 1)
-	{
-		pinSetting = 0;
-	}
-
 	return pins[pinSetting];
-
 }
