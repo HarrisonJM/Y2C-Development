@@ -14,6 +14,7 @@
     <ProjectGuid>{E57C810D-0EFA-4993-BFDB-FABAB577E981}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>LorenzMachineApplication</RootNamespace>
+    <ProjectName>Task6.2</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
