@@ -1,5 +1,3 @@
-/* THIS ONE IS MINE!!!!! */
-
 #include "stdafx.h"
 #include <iostream>
 #include <fstream>
@@ -7,31 +5,25 @@ using namespace std;
 
 #include "lorenzMachine.h"
 #include "teleprinter.h"
-#include "wheel.h"
 
 // construct a lorenz machine object using a pinsettings file
 lorenzMachine constructLorenzMachine();
 
 int main()
 {
-	string phrase;
-
+	// create an instance of the teleprinter and encryption device
 	lorenzMachine encryptionDevice = constructLorenzMachine();
 	teleprinter keyboard(encryptionDevice);
+	
+	// get a message from the user to encrypt
+	string message;
+	cout << "Type your message (using CAPITALS): ";
+	cin >> message;
 
-	cout << "Enter Phrase to encrypt/decrypt: ";
-	//cin >> phrase;
-	getline(cin, phrase);
-
-	string encryptedMessage = keyboard.encryptMessage(phrase);
+	// encrypt the message and display it
+	string encryptedMessage = keyboard.encryptMessage(message);
 	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
-
-	cout << "ENCRYPTED MESSAGE: " << encryptedMessage << endl;
-
-	std::cout << "Press ENTER to continue... " << flush;
-	std::cin.ignore(std::numeric_limits <std::streamsize> ::max(), '\n');
-
-	//string encryptedMessage = keyboard.encryptMessage("JWMFQV--.US");
+	cout << "The encrypted message is " << encryptedMessage << endl;
 
 	return 0;
 }

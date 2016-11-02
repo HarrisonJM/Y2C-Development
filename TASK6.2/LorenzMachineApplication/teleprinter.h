@@ -1,11 +1,9 @@
 #ifndef TELEPRINTER_H
 #define TELEPRINTER_H
 
-#include <string>
-#include <map>
-using namespace std;
-
 #include "lorenzMachine.h"
+#include <map>
+using std::map;
 
 // This class models the teleprinter used in the Lorenz SZ40 Encryption Machine
 class teleprinter

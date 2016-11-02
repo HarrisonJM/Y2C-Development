@@ -10,7 +10,7 @@ class wheel
 {
 private:
 	vector<int> pins; // all wheel pins
-	int pinSetting; // the current pin, index
+	int pinSetting; // the current pin
 
 public:
 	// constructors
