@@ -9,8 +9,11 @@
 
 #include "SimpleTron.h"
 
-SimpleTron::SimpleTron()
+SimpleTron::SimpleTron(string file)
 {
+	programName = file;
+	loadProgramIntoMemory(file);
+
 }
 
 SimpleTron::~SimpleTron()
@@ -35,6 +38,6 @@ void SimpleTron::loadProgramIntoMemory(string file)
 
 	for (int i = 0; i < programLines.size(); i++)
 	{
-		cout << program[i] << endl;;
+		cout << program[i] << endl;
 	}
 }

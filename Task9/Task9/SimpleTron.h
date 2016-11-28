@@ -19,7 +19,7 @@ private:
 	vector<string> program;
 
 public:
-	SimpleTron();
+	SimpleTron(string file);
 	~SimpleTron();
 
 	vector<string> SimpleTron::DisassembleProgram();
