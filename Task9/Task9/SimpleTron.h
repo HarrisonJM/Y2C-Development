@@ -17,11 +17,19 @@ class SimpleTron
 private:
 	string programName;
 	vector<string> program;
+	vector<string> dissassProgram; //dissassembled program
 
 public:
+	SimpleTron();
 	SimpleTron(string file);
 	~SimpleTron();
 
 	vector<string> SimpleTron::DisassembleProgram();
-	void loadProgramIntoMemory(string file);
+	void LoadProgramIntoMemoryFromFile(string file);
+
+	void setProgramName(string name);
+
+	vector<string> getDissassembledProgram();
+	void DisplayDissassembledProgram();
+	void SaveDissassemblyIntoFile();
 };
