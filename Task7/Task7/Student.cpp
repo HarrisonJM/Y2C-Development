@@ -2,6 +2,7 @@
 
 Student::Student()
 {
+	//default constrcutor
 }
 
 Student::Student(string namePar, int studentIDPar)

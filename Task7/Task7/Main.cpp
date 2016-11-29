@@ -36,7 +36,7 @@ int main( void )
 		{
 		case 1:
 			cout << "Please enter StudentID (number): ";
-			cin >> ID;
+			cin >> ID; //student ID entered first to use as a map key
 			Cohort[ID] = AddNewStudent(ID);
 			break;
 		case 2:
@@ -48,7 +48,7 @@ int main( void )
 			break;
 		case 4: Cohort.erase(Cohort.begin(), Cohort.end());
 			break;
-		case 5: userQuit();
+		case 5: UserQuit();
 			break;
 		default: cout << "invalid option try again" << endl;
 			break;
@@ -83,7 +83,7 @@ int PrintAllStudents(map<int, Student> Cohort)
 	for (map<int, Student>::iterator it = Cohort.begin(); it != Cohort.end(); ++it)
 	{
 		Student stemp;
-		stemp = it->second;
+		stemp = it->second; //This was done due to a lack of understanding of how the syntax can be used
 
 		cout << "Student name: " << stemp.getName() << endl;
 		cout << "Student ID: " << stemp.getID() << endl;
