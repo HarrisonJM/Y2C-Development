@@ -26,10 +26,10 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="LinkedList.h">
+    <ClInclude Include="ListItem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="ListItem.h">
+    <ClInclude Include="LinkedBunnies.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

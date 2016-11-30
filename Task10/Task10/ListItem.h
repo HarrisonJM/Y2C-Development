@@ -1,20 +1,41 @@
 #ifndef LISTITEM_H
 #define LISTITEM_H
 
-#define NULL nullptr
+#include <string>
 
-class listItem
+using namespace std;
+
+class Bunny
 {
+
+	enum SEX {
+		MALE, 
+		FEMALE
+	};
+
+	enum COLOUR {
+		WHITE,
+		BROWN,
+		BLACK,
+		SPOTTED
+	};
+
+	friend class LinkedBunnies;
+
 private:
-	int dataValue;
-	listItem* nextListItem = NULL;
+	SEX bunnyGender;
+	int age; //0 -> 10
+	string name;
+
+	Bunny* nextBunny = NULL;
 
 public:
-	listItem(int val, listItem* nextItem);
-	void setNext(listItem* listItem);
-	listItem* getNext();
-	int getValue();
-	void setValue(int newValue);
+	Bunny(SEX bunnyGender, int age, Bunny* nextItem, Bunny *nextBunny);
+	void setNext(Bunny* listItem);
+	Bunny* getNext();
+
+	int getAge();
+	void setAge(int newValue);
 };
 
 #endif

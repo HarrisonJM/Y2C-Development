@@ -1,27 +1,25 @@
 #include "ListItem.h"
 
-listItem::listItem(int val, listItem* nextItem)
+Bunny::Bunny(SEX bunnyGender, int age, Bunny* nextItem, Bunny *nextBunny)
 {
-	setValue(val);
-	setNext(nextItem);
 }
 
-void listItem::setNext(listItem* listItem)
+void Bunny::setNext(Bunny* listItem)
 {
-	this->nextListItem = listItem;
+	this->nextBunny = listItem;
 }
 
-listItem* listItem::getNext()
+Bunny* Bunny::getNext()
 {
-	return this->nextListItem;
+	return this->nextBunny;
 }
 
-int listItem::getValue()
+int Bunny::getAge()
 {
-	return this->dataValue;
+	return this->age;
 }
 
-void listItem::setValue(int newVal)
+void Bunny::setAge(int newVal)
 {
-	this->dataValue = newVal;
+	this->age = newVal;
 }

@@ -1,14 +1,14 @@
-#include "LinkedList.h"
+#include "LinkedBunnies.h"
 
-linkedList::linkedList()
+LinkedBunnies::LinkedBunnies()
 {
 	head = NULL;
 }
 
-linkedList::~linkedList()
+LinkedBunnies::~LinkedBunnies()
 {
-	listItem* current = head;
-	listItem* temp;
+	Bunny* current = head;
+	Bunny* temp;
 
 	while (current != NULL)
 	{
@@ -18,21 +18,21 @@ linkedList::~linkedList()
 	}
 }
 
-void linkedList::insert(int val)
+void LinkedBunnies::insert(enum Bunny::SEX sex, int age, string name)
 {
-	listItem* newItem = new listItem(val, NULL);
+	Bunny* newItem = new Bunny(val, NULL);
 	newItem->setNext(head); // head is the first item in the list
 	head = newItem;
 }
 
-bool linkedList::remove(int val)
+bool LinkedBunnies::remove(int val)
 {
-	listItem* current = head;
-	listItem* previous = NULL;
+	Bunny* current = head;
+	Bunny* previous = NULL;
 
 	while (current != NULL)
 	{
-		if (current->getValue() == val)
+		if (current->getAge() == val)
 		{
 			previous->setNext(current->getNext());
 			delete current;
@@ -44,16 +44,16 @@ bool linkedList::remove(int val)
 	return false;
 }
 
-void linkedList::update(int currentVal, int newVal)
+void LinkedBunnies::update(int currentVal, int newVal)
 {
-	listItem* current = head;
-	listItem* previous = NULL;
+	Bunny* current = head;
+	Bunny* previous = NULL;
 
 	while (current != NULL)
 	{
-		if (current->getValue() == currentVal)
+		if (current->getAge() == currentVal)
 		{
-			current->setValue(newVal);
+			current->setAge(newVal);
 			break;
 		}
 

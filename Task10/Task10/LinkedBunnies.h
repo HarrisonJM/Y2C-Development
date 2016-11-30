@@ -3,18 +3,16 @@
 
 #include "ListItem.h"
 
-#define NULL nullptr
-
-class linkedList
+class LinkedBunnies
 {
 private:
-	listItem* head;
+	Bunny* head;
 
 public:
-	linkedList();
-	~linkedList();
+	LinkedBunnies();
+	~LinkedBunnies();
 
-	void insert(int);
+	void LinkedBunnies::insert(enum Bunny::SEX sex, int age, string name);
 	bool remove(int);
 	void update(int currentVal, int newVal);
 };
