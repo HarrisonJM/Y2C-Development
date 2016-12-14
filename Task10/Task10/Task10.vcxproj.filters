@@ -15,21 +15,24 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="LinkedList.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="ListItem.cpp">
+    <ClCompile Include="LinkedBunnies.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bunny.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ListItem.h">
+    <ClInclude Include="LinkedBunnies.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedBunnies.h">
+    <ClInclude Include="Bunny.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LifeHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

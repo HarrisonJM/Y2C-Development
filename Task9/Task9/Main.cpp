@@ -35,6 +35,8 @@ int main()
 	ST.DisplayDissassembledProgram();
 	ST.SaveDissassemblyIntoFile();
 
+	cout << "Dissassemly Sent to file!" << endl;
+
 	system("pause");
 
 	return 0;

@@ -18,11 +18,12 @@ LinkedBunnies::~LinkedBunnies()
 	}
 }
 
-void LinkedBunnies::insert(enum Bunny::SEX sex, int age, string name)
+void LinkedBunnies::insert(int age)
 {
-	Bunny* newItem = new Bunny(val, NULL);
-	newItem->setNext(head); // head is the first item in the list
-	head = newItem;
+	//Bunny(int age, Bunny *nextBunny)
+	Bunny* newBunny = new Bunny(age, NULL);
+	newBunny->setNext(head); // head is the first item in the list
+	head = newBunny;
 }
 
 bool LinkedBunnies::remove(int val)
@@ -44,10 +45,9 @@ bool LinkedBunnies::remove(int val)
 	return false;
 }
 
-void LinkedBunnies::update(int currentVal, int newVal)
+void LinkedBunnies::updateAge(int currentVal, int newVal) //updates first bunny found
 {
 	Bunny* current = head;
-	Bunny* previous = NULL;
 
 	while (current != NULL)
 	{
@@ -57,9 +57,37 @@ void LinkedBunnies::update(int currentVal, int newVal)
 			break;
 		}
 
-		previous = current;
 		current = current->getNext();
 	}
 
 	return;
+}
+
+void LinkedBunnies::updateAllAge(int currentVal, int newVal) //updates all bunnies of that age
+{
+	Bunny* current = head;
+
+	while (current != NULL)
+	{
+		if (current->getAge() == currentVal)
+		{
+			current->setAge(newVal);
+		}
+
+		current = current->getNext();
+	}
+
+	return;
+}
+
+void LinkedBunnies::AgeBunnies()
+{
+	Bunny* current = head;
+
+	while (current != NULL)
+	{
+		current->setAge(current->getAge() + 1);
+
+		current = current->getNext();
+	}
 }

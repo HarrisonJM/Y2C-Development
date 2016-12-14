@@ -1,0 +1,7 @@
+00 :  (1007): READ into7
+01 :  (1008): READ into8
+02 :  (2007): LOAD 7 into Acc;
+03 :  (3008): ADD to acc from value at 8
+04 :  (2109): STORE Acc. into9
+05 :  (1109): WRITE 9 into CONSOLE
+06 :  (4300): HALT

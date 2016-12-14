@@ -110,13 +110,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="LinkedList.cpp" />
-    <ClCompile Include="ListItem.cpp" />
+    <ClCompile Include="Bunny.cpp" />
+    <ClCompile Include="LinkedBunnies.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Bunny.h" />
+    <ClInclude Include="LifeHandler.h" />
     <ClInclude Include="LinkedBunnies.h" />
-    <ClInclude Include="ListItem.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

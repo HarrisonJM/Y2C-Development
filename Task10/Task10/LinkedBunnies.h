@@ -1,7 +1,7 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include "ListItem.h"
+#include "Bunny.h"
 
 class LinkedBunnies
 {
@@ -12,9 +12,12 @@ public:
 	LinkedBunnies();
 	~LinkedBunnies();
 
-	void LinkedBunnies::insert(enum Bunny::SEX sex, int age, string name);
+	void LinkedBunnies::insert(int age);
 	bool remove(int);
-	void update(int currentVal, int newVal);
+
+	void updateAge(int currentVal, int newVal);
+	void updateAllAge(int currentVal, int newVal);
+	void AgeBunnies();
 };
 
 #endif
