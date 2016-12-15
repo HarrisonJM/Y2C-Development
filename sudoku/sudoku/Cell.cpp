@@ -2,13 +2,24 @@
 
 Cell::Cell()
 {
+
+}
+
+Cell::~Cell()
+{
+
+}
+
+Cell::Cell(int xpos, int ypos, int val)
+{
+	this->cellVal = val;
+	this->x = xpos;
+	this->y = ypos;
+
 	for (int i = 0; i < 8; ++i)
 	{
 		possVal[i] = 0;
 	}
-
-	//also set up this squares value
-
 }
 
 int Cell::getCellVal()

@@ -19,8 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FDC24609-BB38-42EC-9D99-EFC6737ED8C8}</ProjectGuid>
-    <RootNamespace>sudoku</RootNamespace>
+    <ProjectGuid>{BCC7811F-5239-468D-AD29-684629AF51D6}</ProjectGuid>
+    <RootNamespace>Test</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -74,6 +74,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);_CRT_SECURE_NO_WARNINGS</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -110,28 +111,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Backtracking.h" />
-    <ClInclude Include="Board.h" />
-    <ClInclude Include="Cell.h" />
-    <ClInclude Include="column.h" />
-    <ClInclude Include="Constraint.h" />
-    <ClInclude Include="Main.h" />
-    <ClInclude Include="Solver.h" />
-    <ClInclude Include="Zone.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Backtracking.cpp" />
-    <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Cell.cpp" />
-    <ClCompile Include="Constraint.cpp" />
+    <ClCompile Include="fizzbuzz.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Zone.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="sudoku.csv" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="sudokutester.csv" />
+    <ClCompile Include="Source.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

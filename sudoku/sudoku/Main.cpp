@@ -1,5 +1,6 @@
 
 #include "Board.h"
+#include "Backtracking.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -8,10 +9,35 @@ using namespace std;
 
 int main()
 {
-	string fileName;
-	Board board;
+	while (1)
+	{
+		string fileName;
 
-	fileName = "sudoku.txt";	
-	board.populateBoard(fileName, board);
+		int option;
 
+		cout << "Entire sudoku file name" << endl;
+		//cin >> filename;
+
+		fileName = "sudokutester.csv";
+		Board board(fileName);
+
+		cout << "1 for backtracking, 2 for constraint, anything else to exit!" << endl;
+		//cin >> option;
+
+		board.PrintBoard();
+
+		Backtracking BT(board);
+		BT.solve();
+
+		//switch (option)
+		//{
+		//case 1: //backtracker
+		//	break;
+		//case 2: //constraint
+		//	break;
+		//default:
+		//	exit(0);
+		//	break;
+		//}
+	}
 }
