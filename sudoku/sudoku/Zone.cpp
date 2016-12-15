@@ -9,7 +9,7 @@ Zone::Zone(Board b, int position)
 	int indexerx = 0;
 	int indexery = 0;
 
-	vector<vector<int>> board = b.getBoard();
+	vector<vector<Cell>> board = b.getBoard();
 
 	switch (position)
 	{
@@ -76,11 +76,11 @@ bool Zone::CheckAllCellsForCorrect()
 				{
 					if (((i - k) != 0) && ((j - l) != 0)) //same cell
 					{
-						if (cells[i][j] == 0) //whitespace
+						if (cells[i][j].getCellVal() == 0) //whitespace
 						{
 							continue;
 						}
-						if (cells[i][j] == cells[k][l]) //duplicate cell
+						if (cells[i][j].getCellVal() == cells[k][l].getCellVal()) //duplicate cell
 						{
 							return false;
 						}
@@ -99,7 +99,7 @@ bool Zone::CheckAllCellsForZero()
 	{
 		for (int j = 0; i < 3; ++i) //hold value to compare
 		{
-			if (cells[i][j] == 0) //empty cell present
+			if (cells[i][j].getCellVal() == 0) //empty cell present
 			{
 				return false;
 			}

@@ -15,7 +15,7 @@ class Board
 {
 private:
 	//int cells[GRIDSIZE][GRIDSIZE];
-	vector<vector<int>> cells;
+	vector<vector<Cell>> cells;
 
 public:
 	Board();
@@ -24,5 +24,5 @@ public:
 
 	void populateBoard(string name);
 	void PrintBoard();
-	vector<vector<int>> getBoard();
+	vector<vector<Cell>> getBoard();
 };

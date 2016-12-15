@@ -3,17 +3,18 @@
 #include "Board.h"
 #include "Areas.h"
 
-class Zone : public Areas
+class Rows : public Areas
 {
 private:
-	Cell cells[3][3];
+	Cell cells[9];
 
 public:
-	Zone();
-	Zone(Board b, int position);
+	Rows();
+	Rows(Board board, int position);
 
-	~Zone();
+	~Rows();
 
 	virtual bool CheckAllCellsForCorrect(); //Makes sure there are no duplicates
 	virtual bool CheckAllCellsForZero(); //Checks for empty spaces
 };
+

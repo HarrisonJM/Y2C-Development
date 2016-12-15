@@ -39,10 +39,12 @@ Backtracking::Backtracking(Board board)
 {
 	this->board = board;
 
-	for (int i = 0; i < GRIDSIZE; ++i)
+	for (int i = 0; i < GRIDSIZE; ++i) //TODO: PUT ALL AREAS INTO A SINGLE ZONE VECTOR
 	{
-		Zone temp(board, i);
-		zones.push_back(temp);
+		Zone zt(board, i);
+		zones.push_back(zt);
+		Column ct(board, i);
+		columns.push_back(ct);
 	}
 }
 

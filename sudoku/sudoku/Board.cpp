@@ -6,14 +6,15 @@ Board::Board()
 {
 	for (int rows = 0; rows < GRIDSIZE; rows++)
 	{
-		cells.push_back(std::vector<int>()); //generates rows
+		cells.push_back(std::vector<Cell>()); //generates rows
 	}
 
 	for (int columns = 0; columns < GRIDSIZE; ++columns)
 	{
 		for (int rows = 0; rows < GRIDSIZE; ++rows)
 		{
-			cells[rows].push_back('.'); // Adds columns to all rows
+			Cell temp(0);
+			cells[rows].push_back(temp); // Adds columns to all rows
 		}
 	}
 }
@@ -22,7 +23,7 @@ Board::Board(string name)
 {
 	for (int rows = 0; rows < GRIDSIZE; rows++)
 	{
-		cells.push_back(std::vector<int>()); //generates rows
+		cells.push_back(std::vector<Cell>()); //generates rows
 	}
 
 	for (int columns = 0; columns < GRIDSIZE; ++columns)
@@ -57,11 +58,11 @@ void Board::populateBoard(string name)
 		for (j = 0; j < GRIDSIZE-1; j++) //colomuns
 		{
 			getline(infile, c, ',');
-			cells[i][j] = stoi(c);
+			cells[i][j].setCellVal(stoi(c)); //= stoi(c);
 		}
 		
 		getline(infile, c);
-		cells[i][j] = stoi(c);
+		cells[i][j].setCellVal(stoi(c));
 	}
 
 	return;
@@ -73,14 +74,14 @@ void Board::PrintBoard()
 	{
 		for (int j = 0; j < GRIDSIZE; ++j)
 		{
-			cout << "|" << cells[i][j];
+			cout << "|" << cells[i][j].getCellVal();
 		}
 
 		cout << endl;
 	}
 }
 
-vector<vector<int>> Board::getBoard()
+vector<vector<Cell>> Board::getBoard()
 {
 	return cells;
 }

@@ -13,7 +13,7 @@ int main()
 	{
 		string fileName;
 
-		int option;
+		//int option;
 
 		cout << "Entire sudoku file name" << endl;
 		//cin >> filename;
