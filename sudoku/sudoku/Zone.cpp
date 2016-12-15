@@ -97,7 +97,7 @@ bool Zone::CheckAllCellsForZero()
 {
 	for (int i = 0; i < 3; ++i) //hold value to compare
 	{
-		for (int j = 0; i < 3; ++i) //hold value to compare
+		for (int j = 0; j < 3; ++j) //hold value to compare
 		{
 			if (cells[i][j].getCellVal() == 0) //empty cell present
 			{
