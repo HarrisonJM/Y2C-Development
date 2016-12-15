@@ -71,7 +71,7 @@
     <ClInclude Include="Column.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Rows.h">
+    <ClInclude Include="Row.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

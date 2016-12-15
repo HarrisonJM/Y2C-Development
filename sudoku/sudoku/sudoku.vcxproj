@@ -117,7 +117,7 @@
     <ClInclude Include="Column.h" />
     <ClInclude Include="Constraint.h" />
     <ClInclude Include="Main.h" />
-    <ClInclude Include="Rows.h" />
+    <ClInclude Include="Row.h" />
     <ClInclude Include="Solver.h" />
     <ClInclude Include="Zone.h" />
   </ItemGroup>

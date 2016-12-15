@@ -1,7 +1,8 @@
-#include "Rows.h"
+#include "Row.h"
 
 Rows::Rows()
 {
+
 }
 
 Rows::Rows(Board b, int position)
@@ -18,7 +19,7 @@ Rows::~Rows()
 {
 }
 
-bool Rows::CheckAllCellsForCorrect()
+bool Rows::CheckAllCellsForCorrect() //TODO: pass to higher level or someshit I dunno
 {
 	return Areas::CheckAllCellsForCorrect();
 }

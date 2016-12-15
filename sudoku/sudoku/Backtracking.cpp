@@ -1,5 +1,5 @@
 #include "Backtracking.h"
-#include "Zone.h"
+#include <iostream>
 
 //while (empty cells exist in solution) 
 //{
@@ -45,6 +45,8 @@ Backtracking::Backtracking(Board board)
 		zones.push_back(zt);
 		Column ct(board, i);
 		columns.push_back(ct);
+		Rows rt(board, i);
+		rows.push_back(rt);
 	}
 }
 
@@ -59,7 +61,12 @@ void Backtracking::solve()
 
 	for (int i = 0; i < GRIDSIZE; ++i)
 	{
-		zones[i].CheckAllCellsForCorrect();
-		zones[i].CheckAllCellsForZero();
+		std::cout << "Zones " << i << ": " << zones[i].CheckAllCellsForCorrect() << zones[i].CheckAllCellsForZero() << std::endl;
+		std::cout << "Rows " << i << ": " << rows[i].CheckAllCellsForCorrect() << rows[i].CheckAllCellsForZero() << std::endl;
+		std::cout << "Columns " << i << ": " << columns[i].CheckAllCellsForCorrect() << columns[i].CheckAllCellsForZero() << std::endl;
+		std::cout << std::endl;
+		std::cout << std::endl;
 	}
+
+	return;
 }
