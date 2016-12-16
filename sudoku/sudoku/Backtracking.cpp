@@ -45,9 +45,11 @@ Backtracking::Backtracking(Board board)
 		zones.push_back(zt);
 		Column ct(board, i);
 		columns.push_back(ct);
-		Rows rt(board, i);
+		Row rt(board, i);
 		rows.push_back(rt);
 	}
+
+	fillMap();
 }
 
 Backtracking::~Backtracking()
@@ -55,18 +57,82 @@ Backtracking::~Backtracking()
 
 }
 
-void Backtracking::solve()
+void Backtracking::fillMap()
 {
-	Board backup = board;
+	vector<vector<Cell>> b = board.getBoard();
+	int index = 0;
 
-	for (int i = 0; i < GRIDSIZE; ++i)
+	for (int i = 0; i < 9; ++i)
 	{
-		std::cout << "Zones " << i << ": " << zones[i].CheckAllCellsForCorrect() << zones[i].CheckAllCellsForZero() << std::endl;
-		std::cout << "Rows " << i << ": " << rows[i].CheckAllCellsForCorrect() << rows[i].CheckAllCellsForZero() << std::endl;
-		std::cout << "Columns " << i << ": " << columns[i].CheckAllCellsForCorrect() << columns[i].CheckAllCellsForZero() << std::endl;
-		std::cout << std::endl;
-		std::cout << std::endl;
+		for (int j = 0; j < 9; ++j)
+		{
+			if (b[i][j].getCellVal() == 0)
+			{
+				Cell cell(i, j);
+				gaps[0] = cell;
+			}
+		}
+	}
+}
+
+void Backtracking::Solve()
+{
+	vector<vector<Cell>> backup = board.getBoard();
+	
+	for (int i = 0; gaps.size(); ++i) //for each false position
+	{
+		for (int j = gaps[i].getCellVal(); j < 10;) //start couting from last value used because previous didn't work
+		{
+			while(UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup))
+			{
+				if (j > 9) //maximum value
+				{
+					i -= 2; //step two steps back, i will be incremented when for loop exit
+					UpdateCell(0, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
+					break;
+				}
+			}
+		}
+
+		board.updateBoard(backup);
 	}
 
 	return;
 }
+
+bool Backtracking::UpdateCell(int value, int col, int rw, vector<vector<Cell>> *b) //returns true if number invalid
+{
+	int backup = b->at(rw).at(col).getCellVal();
+	Board ig;
+
+	//columns
+	columns.at(col).AccessCells(rw, NULL).setCellVal(value);
+	if (columns.at(col).CheckAllCellsForCorrect() == 0)
+	{
+		return true;
+	}
+
+	//rows
+	rows.at(rw).AccessCells(col, NULL).setCellVal(value);
+	if (rows.at(rw).CheckAllCellsForCorrect() == 0)
+	{
+		return true;
+	}
+
+	//zones
+	zones.at(ig.FindZone(rw, col)).AccessCells(rw, col);
+	if (zones[ig.FindZone(rw, col)].CheckAllCellsForCorrect())
+	{
+		return true;
+	}
+
+	//generic board
+	b->at(rw).at(col).setCellVal(value);
+
+	return false;
+
+}
+
+
+
+

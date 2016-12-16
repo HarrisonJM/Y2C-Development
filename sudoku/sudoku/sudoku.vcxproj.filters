@@ -36,10 +36,10 @@
     <ClCompile Include="Column.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Rows.cpp">
+    <ClCompile Include="Areas.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Areas.cpp">
+    <ClCompile Include="Row.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

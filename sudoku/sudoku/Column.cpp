@@ -18,6 +18,11 @@ Column::~Column()
 {
 }
 
+Cell Column::AccessCells(int xpos, int ypos)
+{
+	return cells[xpos];
+}
+
 bool Column::CheckAllCellsForCorrect() //TRUE = cells correct, FALSE = duplicates
 {
 	for (int i = 0; i < GRIDSIZE; ++i)

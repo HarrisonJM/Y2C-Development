@@ -5,6 +5,7 @@
 class Backtracking : public Solver
 {
 private:
+	map<int, Cell> gaps;
 
 public:
 
@@ -12,6 +13,11 @@ public:
 	Backtracking(Board board);
 	~Backtracking();
 
-	void solve();
+	void fillMap();
+
+	void Solve();
+
+	//bool UpdateCell(int value, int col, int rw);
+	bool UpdateCell(int value, int col, int rw, vector<vector<Cell>> *b);
 
 };

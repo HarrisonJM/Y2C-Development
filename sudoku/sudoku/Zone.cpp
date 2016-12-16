@@ -64,6 +64,11 @@ Zone::~Zone()
 {
 }
 
+Cell Zone::AccessCells(int xpos, int ypos)
+{
+	return cells[xpos][ypos];
+}
+
 bool Zone::CheckAllCellsForCorrect()
 {
 	for (int i = 0; i < 3; ++i) //hold value to compare

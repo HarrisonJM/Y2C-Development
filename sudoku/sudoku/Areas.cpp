@@ -35,3 +35,8 @@ bool Areas::CheckAllCellsForZero()
 
 	return true;
 }
+
+Cell Areas::AccessCells(int xpos, int ypos)
+{
+	return cells[xpos];
+}

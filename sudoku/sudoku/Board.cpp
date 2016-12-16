@@ -39,6 +39,11 @@ Board::Board(string name)
 	return;
 }
 
+Board::Board(vector<vector<Cell>> b)
+{
+	this->cells = b;
+}
+
 Board::~Board()
 {
 
@@ -84,6 +89,65 @@ void Board::PrintBoard()
 vector<vector<Cell>> Board::getBoard()
 {
 	return cells;
+}
+
+void Board::updateBoard(Board b)
+{
+	this->cells = b.getBoard();
+}
+
+int Board::FindZone(int xpos, int ypos)
+{
+	//two given values should be for th epositon of the corner of the zone
+	int sector;
+
+	if (xpos >= 0 && xpos <= 2)
+	{
+		if (ypos >= 0 && ypos <= 2)
+		{
+			sector = 0;
+		}
+		else if (ypos >= 3 && ypos <= 5)
+		{
+			sector = 1;
+		}
+		else if (ypos >= 6 && ypos <= 8)
+		{
+			sector = 2;
+		}
+	}
+	else if (xpos >= 3 && xpos <= 5)
+	{
+		if (ypos >= 0 && ypos <= 2)
+		{
+			sector = 3;
+		}
+		else if (ypos >= 3 && ypos <= 5)
+		{
+			sector = 4;
+		}
+		else if (ypos >= 6 && ypos <= 8)
+		{
+			sector = 5;
+		}
+	}
+	else if (xpos >= 6 && xpos <= 8)
+	{
+		if (ypos >= 0 && ypos <= 2)
+		{
+			sector = 6;
+		}
+		else if (ypos >= 3 && ypos <= 5)
+		{
+			sector = 7;
+		}
+		else if (ypos >= 6 && ypos <= 8)
+		{
+			sector = 8;
+		}
+	}
+
+	return sector; //returns an index
 }
 
 //int(*get_grid())[5]

@@ -1,11 +1,11 @@
 #include "Row.h"
 
-Rows::Rows()
+Row::Row()
 {
 
 }
 
-Rows::Rows(Board b, int position)
+Row::Row(Board b, int position)
 {
 	vector<vector<Cell>> board = b.getBoard();
 
@@ -15,11 +15,17 @@ Rows::Rows(Board b, int position)
 	}
 }
 
-Rows::~Rows()
+Row::~Row()
 {
 }
 
-bool Rows::CheckAllCellsForCorrect()
+Cell Row::AccessCells(int xpos, int ypos)
+{
+	return cells[xpos];
+}
+
+
+bool Row::CheckAllCellsForCorrect()
 {
 	for (int i = 0; i < GRIDSIZE; ++i)
 	{
@@ -42,7 +48,7 @@ bool Rows::CheckAllCellsForCorrect()
 	return true;
 }
 
-bool Rows::CheckAllCellsForZero()
+bool Row::CheckAllCellsForZero()
 {
 	for (int i = 0; i < 9; ++i) //hold value to compare
 	{

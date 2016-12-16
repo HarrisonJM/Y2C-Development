@@ -20,9 +20,14 @@ private:
 public:
 	Board();
 	Board(string name);
+	Board(vector<vector<Cell>> b);
 	~Board();
 
 	void populateBoard(string name);
 	void PrintBoard();
+
 	vector<vector<Cell>> getBoard();
+	void updateBoard(Board b);
+
+	int FindZone(int xpos, int ypos);
 };

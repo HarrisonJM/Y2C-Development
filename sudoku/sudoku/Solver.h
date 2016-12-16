@@ -4,6 +4,7 @@
 #include "Zone.h"
 #include "Column.h"
 #include "Row.h"
+#include <map>
 #include <vector>
 
 using namespace std;
@@ -14,7 +15,7 @@ public:
 	Board board;
 	vector<Zone> zones;
 	vector<Column> columns;
-	vector<Rows> rows;
+	vector<Row> rows;
 
 private:
 };

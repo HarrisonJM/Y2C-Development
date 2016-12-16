@@ -27,7 +27,7 @@ int main()
 		board.PrintBoard();
 
 		Backtracking BT(board);
-		BT.solve();
+		BT.Solve();
 
 		//switch (option)
 		//{
