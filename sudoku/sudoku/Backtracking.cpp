@@ -69,7 +69,8 @@ void Backtracking::fillMap()
 			if (b[i][j].getCellVal() == 0)
 			{
 				Cell cell(i, j);
-				gaps[0] = cell;
+				this->gaps[index] = cell;
+				++index;
 			}
 		}
 	}
