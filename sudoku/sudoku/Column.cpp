@@ -18,10 +18,9 @@ Column::~Column()
 {
 }
 
-Cell Column::AccessCells(int xpos, int ypos)
+Cell* Column::AccessCells(int xpos, int ypos)
 {
-	//FOLLOW IT TO HERE
-	return cells[xpos];
+	return &cells[xpos];
 }
 
 bool Column::CheckAllCellsForCorrect() //TRUE = cells correct, FALSE = duplicates

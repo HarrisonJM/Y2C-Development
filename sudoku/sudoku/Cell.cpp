@@ -32,12 +32,7 @@ int Cell::getCellVal()
 
 void Cell::setCellVal(int val)
 {
-	//FINALLY TO HERE
-	std::cout << cellVal; //debugging
 	this->cellVal = val;
-	std::cout << cellVal; //debugging
-	std::cout << val; //debugging
-
 }
 
 int Cell::getxPos()
@@ -58,9 +53,4 @@ int Cell::getyPos()
 void Cell::setypos(int y)
 {
 	this->ypos = y;
-}
-
-int * Cell::ReturnPossVal()
-{
-	return nullptr;
 }

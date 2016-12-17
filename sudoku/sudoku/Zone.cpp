@@ -64,9 +64,9 @@ Zone::~Zone()
 {
 }
 
-Cell Zone::AccessCells(int xpos, int ypos)
+Cell* Zone::AccessCells(int xpos, int ypos)
 {
-	return cells[xpos][ypos];
+	return &cells[xpos][ypos];
 }
 
 bool Zone::CheckAllCellsForCorrect() //duplciate = false, all good = true

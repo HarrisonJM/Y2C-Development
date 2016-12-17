@@ -19,9 +19,9 @@ Row::~Row()
 {
 }
 
-Cell Row::AccessCells(int xpos, int ypos)
+Cell* Row::AccessCells(int xpos, int ypos)
 {
-	return cells[xpos];
+	return &cells[xpos];
 }
 
 bool Row::CheckAllCellsForCorrect()

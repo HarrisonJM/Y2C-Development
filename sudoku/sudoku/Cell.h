@@ -22,7 +22,4 @@ public:
 	void setxPos(int x);
 	int getyPos();
 	void setypos(int y);
-
-
-	int* ReturnPossVal();
 };

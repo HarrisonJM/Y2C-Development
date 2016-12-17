@@ -85,8 +85,9 @@ void Backtracking::Solve()
 	for (int i = 0; gaps.size(); ++i) //for each false position
 	{
 		for (int j = gaps[i].getCellVal(); j < 10;) //start couting from last value used because previous didn't work
-		{
-			while(UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup))
+		{	//BUG EXISTS HERE. NEED TO NOT LET 10 GET INTO THAT METHOD!!
+			bool loop = UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
+			while(loop)
 			{
 				if (j > 9) //maximum value
 				{
@@ -109,31 +110,28 @@ bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) 
 	Board ig;
 
 	//columns is a vector of colomn. inside their Cells are stored as a single array of colomns
-	//columns.at(x).AccessCells(y, NULL).setCellVal(value); //x colomn on row y
-	//SHIT GOING WRONG AROUND HERE
-	columns[x].AccessCells(y, NULL).setCellVal(value); //x colomn on row y
-	std::cout << columns[x].AccessCells(y, NULL).getCellVal(); //DEBUGGING LINE
+	columns[x].AccessCells(y, NULL)->setCellVal(value); //x colomn on row y
 	if (columns.at(x).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
 	{
 		return true;
 	}
 
 	//rows
-	rows.at(y).AccessCells(x, NULL).setCellVal(value);
+	rows.at(y).AccessCells(x, NULL)->setCellVal(value);
 	if (rows.at(y).CheckAllCellsForCorrect() == false)
 	{
 		return true;
 	}
 
 	//zones
-	zones.at(ig.FindZone(x, y)).AccessCells(y, x);
+	zones.at(ig.FindZone(x, y)).AccessCells(y, x)->setCellVal(value);
 	if (zones[ig.FindZone(x, y)].CheckAllCellsForCorrect() == false)
 	{
 		return true;
 	}
 
 	//generic board
-	b->at(y).at(x).setCellVal(value);
+	b->at(x).at(y).setCellVal(value);
 
 	return false;
 
