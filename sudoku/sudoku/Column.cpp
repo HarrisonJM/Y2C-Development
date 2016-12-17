@@ -20,6 +20,7 @@ Column::~Column()
 
 Cell Column::AccessCells(int xpos, int ypos)
 {
+	//FOLLOW IT TO HERE
 	return cells[xpos];
 }
 

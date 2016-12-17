@@ -78,7 +78,9 @@ void Backtracking::fillMap()
 
 void Backtracking::Solve()
 {
-	vector<vector<Cell>> backup = board.getBoard();
+	vector<vector<Cell>> backup = board.getBoard(); 
+	//All of these can be replaced by having an AccessCells() method, 
+	//but I wrote those for the others after I started doign this
 	
 	for (int i = 0; gaps.size(); ++i) //for each false position
 	{
@@ -106,17 +108,16 @@ bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) 
 	int backup = b->at(y).at(x).getCellVal();
 	Board ig;
 
-	//columns
+	//columns is a vector of colomn. inside their Cells are stored as a single array of colomns
 	//columns.at(x).AccessCells(y, NULL).setCellVal(value); //x colomn on row y
-	//if (columns.at(x).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
-	//{
-	//	return true;
-	//}
-	columns.at(y).AccessCells(x, NULL).setCellVal(value); //x colomn on row y
-	if (columns.at(y).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
+	//SHIT GOING WRONG AROUND HERE
+	columns[x].AccessCells(y, NULL).setCellVal(value); //x colomn on row y
+	std::cout << columns[x].AccessCells(y, NULL).getCellVal(); //DEBUGGING LINE
+	if (columns.at(x).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
 	{
 		return true;
 	}
+
 	//rows
 	rows.at(y).AccessCells(x, NULL).setCellVal(value);
 	if (rows.at(y).CheckAllCellsForCorrect() == false)

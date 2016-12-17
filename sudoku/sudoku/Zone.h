@@ -14,6 +14,7 @@ public:
 
 	~Zone();
 
+	//virtual Cell AccessCells(int xpos, int ypos);
 	Cell AccessCells(int xpos, int ypos);
 
 	virtual bool CheckAllCellsForCorrect(); //Makes sure there are no duplicates

@@ -1,4 +1,5 @@
 #include "Cell.h"
+#include <iostream>
 
 Cell::Cell()
 {
@@ -13,6 +14,8 @@ Cell::~Cell()
 Cell::Cell(int val)
 {
 	this->cellVal = val;
+	this->xpos = 0;
+	this->ypos = 0; //if this constructor is calleld we don't care what their positions are
 }
 
 Cell::Cell(int x, int y)
@@ -29,7 +32,12 @@ int Cell::getCellVal()
 
 void Cell::setCellVal(int val)
 {
-	cellVal = val;
+	//FINALLY TO HERE
+	std::cout << cellVal; //debugging
+	this->cellVal = val;
+	std::cout << cellVal; //debugging
+	std::cout << val; //debugging
+
 }
 
 int Cell::getxPos()

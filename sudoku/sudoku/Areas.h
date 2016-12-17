@@ -10,7 +10,7 @@ private:
 
 public:
 
-	virtual Cell AccessCells(int xpos, int ypos) = 0;
+	//virtual Cell AccessCells(int xpos, int ypos) = 0;
 
 	virtual bool CheckAllCellsForCorrect() = 0; //Makes sure there are no duplicates
 	virtual bool CheckAllCellsForZero() = 0;

@@ -24,7 +24,6 @@ Cell Row::AccessCells(int xpos, int ypos)
 	return cells[xpos];
 }
 
-
 bool Row::CheckAllCellsForCorrect()
 {
 	for (int i = 0; i < GRIDSIZE; ++i)
