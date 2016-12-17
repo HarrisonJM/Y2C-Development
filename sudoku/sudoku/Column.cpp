@@ -23,6 +23,7 @@ Cell* Column::AccessCells(int xpos, int ypos)
 	return &cells[xpos];
 }
 
+//This method can be duplicated/improved by accepting an index and only hcecking against that
 bool Column::CheckAllCellsForCorrect() //TRUE = cells correct, FALSE = duplicates
 {
 	for (int i = 0; i < GRIDSIZE; ++i)

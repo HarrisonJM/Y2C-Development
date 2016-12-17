@@ -85,11 +85,10 @@ void Backtracking::Solve()
 	for (int i = 0; gaps.size(); ++i) //for each false position
 	{
 		for (int j = gaps[i].getCellVal(); j < 10;) //start couting from last value used because previous didn't work
-		{	//BUG EXISTS HERE. NEED TO NOT LET 10 GET INTO THAT METHOD!!
-			bool loop = UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
-			while(loop)
+		{
+			while(UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup))
 			{
-				if (j > 9) //maximum value
+				if (j+1 > 9) //maximum value
 				{
 					i -= 2; //step two steps back, i will be incremented when for loop exit
 					UpdateCell(0, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
@@ -117,16 +116,21 @@ bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) 
 	}
 
 	//rows
-	rows.at(y).AccessCells(x, NULL)->setCellVal(value);
+	rows.at(y).AccessCells(x, NULL)->setCellVal(value); //WORKING!
 	if (rows.at(y).CheckAllCellsForCorrect() == false)
 	{
 		return true;
 	}
 
 	//zones
-	zones.at(ig.FindZone(x, y)).AccessCells(y, x)->setCellVal(value);
-	if (zones[ig.FindZone(x, y)].CheckAllCellsForCorrect() == false)
-	{
+	zones.at(ig.FindZone(x, y)).AccessCells(y, x)->setCellVal(value); //NEXT PART TO CHECK
+	//rows_per_sector(2) * (current_row(3) / rows_per_sector(2)) = 2
+	//cols_per_sector(3) * (current_col(5) / cols_per_sector(3)) = 3
+	int posx = 3 * x / 3;
+	int posy = 3 * y / 3;
+	if (zones[ig.FindZone(posx, posy)].CheckAllCellsForCorrect() == false)
+	{	//OUT BUG EXISTS IN THE INDEXERS x and y! X and Y cannot be used to access parts of the ZONE because the bounds of the zone don't go up that high
+		//TODO: !!!
 		return true;
 	}
 
