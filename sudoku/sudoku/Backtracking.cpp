@@ -101,34 +101,38 @@ void Backtracking::Solve()
 	return;
 }
 
-bool Backtracking::UpdateCell(int value, int col, int rw, vector<vector<Cell>> *b) //returns true if number invalid
+bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) //returns true if number invalid
 {
-	int backup = b->at(rw).at(col).getCellVal();
+	int backup = b->at(y).at(x).getCellVal();
 	Board ig;
 
 	//columns
-	columns.at(col).AccessCells(rw, NULL).setCellVal(value);
-	if (columns.at(col).CheckAllCellsForCorrect() == 0)
+	//columns.at(x).AccessCells(y, NULL).setCellVal(value); //x colomn on row y
+	//if (columns.at(x).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
+	//{
+	//	return true;
+	//}
+	columns.at(y).AccessCells(x, NULL).setCellVal(value); //x colomn on row y
+	if (columns.at(y).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
 	{
 		return true;
 	}
-
 	//rows
-	rows.at(rw).AccessCells(col, NULL).setCellVal(value);
-	if (rows.at(rw).CheckAllCellsForCorrect() == 0)
+	rows.at(y).AccessCells(x, NULL).setCellVal(value);
+	if (rows.at(y).CheckAllCellsForCorrect() == false)
 	{
 		return true;
 	}
 
 	//zones
-	zones.at(ig.FindZone(rw, col)).AccessCells(rw, col);
-	if (zones[ig.FindZone(rw, col)].CheckAllCellsForCorrect())
+	zones.at(ig.FindZone(x, y)).AccessCells(y, x);
+	if (zones[ig.FindZone(x, y)].CheckAllCellsForCorrect() == false)
 	{
 		return true;
 	}
 
 	//generic board
-	b->at(rw).at(col).setCellVal(value);
+	b->at(y).at(x).setCellVal(value);
 
 	return false;
 

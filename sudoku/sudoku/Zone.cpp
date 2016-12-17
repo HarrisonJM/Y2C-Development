@@ -69,7 +69,7 @@ Cell Zone::AccessCells(int xpos, int ypos)
 	return cells[xpos][ypos];
 }
 
-bool Zone::CheckAllCellsForCorrect()
+bool Zone::CheckAllCellsForCorrect() //duplciate = false, all good = true
 {
 	for (int i = 0; i < 3; ++i) //hold value to compare
 	{
