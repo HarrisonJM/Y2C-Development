@@ -28,6 +28,8 @@ int main()
 
 		Backtracking BT(board);
 		BT.Solve();
+		board = BT.retBoard();
+		board.PrintBoard();
 
 		//switch (option)
 		//{

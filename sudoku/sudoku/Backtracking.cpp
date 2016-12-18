@@ -1,5 +1,6 @@
 #include "Backtracking.h"
 #include <iostream>
+#include <string>
 
 //while (empty cells exist in solution) 
 //{
@@ -76,7 +77,7 @@ void Backtracking::fillMap()
 	}
 }
 
-void Backtracking::Solve()
+bool Backtracking::Solve()
 {
 	vector<vector<Cell>> backup = board.getBoard(); 
 	//All of these can be replaced by having an AccessCells() method, 
@@ -84,23 +85,30 @@ void Backtracking::Solve()
 	
 	for (int i = 0; gaps.size(); ++i) //for each false position
 	{
-		for (int j = gaps[i].getCellVal(); j < 10;) //start couting from last value used because previous didn't work
-		{
-			while(UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup))
+		int j = gaps[i].getCellVal(); //start couting from last value used because previous didn't work
+		
+		while(UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup))
+		{ //bugs still exist here
+			system("cls");
+			board.PrintBoard();
+			
+			//cout << endl << endl;
+			if (j+1 > 9 || j > 9) //maximum value
 			{
-				if (j+1 > 9) //maximum value
-				{
-					i -= 2; //step two steps back, i will be incremented when for loop exit
-					UpdateCell(0, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
-					break;
-				}
+				j = 0;
+				UpdateCell(j, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
+				i -= 2; //step two steps back, i will be incremented when for loop exit
+				break;
 			}
 		}
+
+		gaps[i].setCellVal(j);
+		
 
 		board.updateBoard(backup);
 	}
 
-	return;
+	return true; //solved!
 }
 
 bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) //returns true if number invalid
@@ -123,13 +131,13 @@ bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) 
 	}
 
 	//zones
-	zones.at(ig.FindZone(x, y)).AccessCells(y, x)->setCellVal(value); //NEXT PART TO CHECK
+	int posx = FindPos(x);
+	int posy = FindPos(y);
+	zones.at(ig.FindZone(x, y)).AccessCells(posx, posy)->setCellVal(value); //NEXT PART TO CHECK
 	//rows_per_sector(2) * (current_row(3) / rows_per_sector(2)) = 2
 	//cols_per_sector(3) * (current_col(5) / cols_per_sector(3)) = 3
-	int posx = 3 * x / 3;
-	int posy = 3 * y / 3;
 	if (zones[ig.FindZone(posx, posy)].CheckAllCellsForCorrect() == false)
-	{	//OUT BUG EXISTS IN THE INDEXERS x and y! X and Y cannot be used to access parts of the ZONE because the bounds of the zone don't go up that high
+	{	//OUT sector 2 (3) isn't cecking correctly
 		//TODO: !!!
 		return true;
 	}
@@ -139,6 +147,39 @@ bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) 
 
 	return false;
 
+}
+
+int Backtracking::FindPos(int pos)
+{
+	switch (pos)
+	{
+	case 0:
+	case 1:
+	case 2:
+		return pos;
+		break;
+	case 3:
+	case 4:
+	case 5:
+		return pos - 3;
+		break;
+	case 6:
+	case 7:
+	case 8:
+		return pos - 6;
+		break;
+	default:
+		try
+		{
+			throw pos;
+		}
+		catch (int e)
+		{
+			cout << "Too big. Surpised it dind't out of range!" << e << endl;
+		}
+
+	}
+	return pos;
 }
 
 

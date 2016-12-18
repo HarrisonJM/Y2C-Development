@@ -99,7 +99,7 @@ void Board::updateBoard(Board b)
 int Board::FindZone(int xpos, int ypos)
 {
 	//two given values should be for th epositon of the corner of the zone
-	int sector;
+	int sector =0;
 
 	if (xpos >= 0 && xpos <= 2)
 	{

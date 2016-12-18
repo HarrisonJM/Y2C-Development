@@ -17,5 +17,7 @@ public:
 	vector<Column> columns;
 	vector<Row> rows;
 
+	Board retBoard();
+
 private:
 };

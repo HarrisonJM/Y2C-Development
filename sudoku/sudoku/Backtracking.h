@@ -15,9 +15,11 @@ public:
 
 	void fillMap();
 
-	void Solve();
+	bool Solve();
 
 	//bool UpdateCell(int value, int col, int rw);
 	bool UpdateCell(int value, int col, int rw, vector<vector<Cell>> *b);
 
+
+	int FindPos(int pos);
 };
