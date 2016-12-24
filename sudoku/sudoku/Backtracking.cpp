@@ -87,23 +87,27 @@ bool Backtracking::Solve()
 	{
 		int j = gaps[i].getCellVal(); //start couting from last value used because previous didn't work
 		
-		while(UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup))
+		while(UpdateCell(++j, gaps[i].getxPos(), gaps[i].getyPos(), &backup)) //only enters loop if false, so if 9 is correct, it breaks
 		{ //bugs still exist here
 			system("cls");
+			board.updateBoard(backup);
 			board.PrintBoard();
 			
 			//cout << endl << endl;
 			if (j+1 > 9 || j > 9) //maximum value
 			{
 				j = 0;
-				UpdateCell(j, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
+				UpdateCell(0, gaps[i].getxPos(), gaps[i].getyPos(), &backup);
+				gaps[i].setCellVal(0);
 				i -= 2; //step two steps back, i will be incremented when for loop exit
 				break;
 			}
 		}
 
+		system("cls");
+		board.PrintBoard();
+
 		gaps[i].setCellVal(j);
-		
 
 		board.updateBoard(backup);
 	}
@@ -114,38 +118,47 @@ bool Backtracking::Solve()
 bool Backtracking::UpdateCell(int value, int x, int y, vector<vector<Cell>> *b) //returns true if number invalid
 {
 	int backup = b->at(y).at(x).getCellVal();
-	Board ig;
-
-	//columns is a vector of colomn. inside their Cells are stored as a single array of colomns
-	columns[x].AccessCells(y, NULL)->setCellVal(value); //x colomn on row y
-	if (columns.at(x).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
-	{
-		return true;
-	}
-
-	//rows
-	rows.at(y).AccessCells(x, NULL)->setCellVal(value); //WORKING!
-	if (rows.at(y).CheckAllCellsForCorrect() == false)
-	{
-		return true;
-	}
-
-	//zones
 	int posx = FindPos(x);
 	int posy = FindPos(y);
-	zones.at(ig.FindZone(x, y)).AccessCells(posx, posy)->setCellVal(value); //NEXT PART TO CHECK
-	//rows_per_sector(2) * (current_row(3) / rows_per_sector(2)) = 2
-	//cols_per_sector(3) * (current_col(5) / cols_per_sector(3)) = 3
-	if (zones[ig.FindZone(posx, posy)].CheckAllCellsForCorrect() == false)
-	{	//OUT sector 2 (3) isn't cecking correctly
-		//TODO: !!!
-		return true;
+	Board ig;
+
+	if (value == 0) //just sets everything to 0 without checks
+	{
+		columns[x].AccessCells(y, NULL)->setCellVal(value); //x colomn on row y
+		rows.at(y).AccessCells(x, NULL)->setCellVal(value); //WORKING!
+		zones.at(ig.FindZone(x, y)).AccessCells(posx, posy)->setCellVal(value); //NEXT PART TO CHECK
+		b->at(x).at(y).setCellVal(value);
+
+		return false;
 	}
+	else
+	{
+		//columns is a vector of colomn. inside their Cells are stored as a single array of colomns
+		columns[x].AccessCells(y, NULL)->setCellVal(value); //x colomn on row y
+		if (columns.at(x).CheckAllCellsForCorrect() == false) //False = duplicates, true = good
+		{
+			return true;
+		}
 
-	//generic board
-	b->at(x).at(y).setCellVal(value);
+		//rows
+		rows.at(y).AccessCells(x, NULL)->setCellVal(value); //WORKING!
+		if (rows.at(y).CheckAllCellsForCorrect() == false)
+		{
+			return true;
+		}
 
-	return false;
+		//zones
+		zones.at(ig.FindZone(x, y)).AccessCells(posx, posy)->setCellVal(value); //NEXT PART TO CHECK
+		if (zones[ig.FindZone(posx, posy)].CheckAllCellsForCorrect() == false)
+		{
+			return true;
+		}
+
+		//generic board
+		b->at(x).at(y).setCellVal(value);
+
+		return false;
+	}
 
 }
 

@@ -40,6 +40,11 @@ bool Column::CheckAllCellsForCorrect() //TRUE = cells correct, FALSE = duplicate
 				{
 					return false;
 				}
+
+				if (cells[i].getCellVal() > 9) //too big
+				{
+					return false;
+				}
 			}
 		}
 	}

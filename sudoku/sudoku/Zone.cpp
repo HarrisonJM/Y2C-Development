@@ -85,7 +85,13 @@ bool Zone::CheckAllCellsForCorrect() //duplciate = false, all good = true
 						{
 							continue;
 						}
+
 						if (cells[i][j].getCellVal() == cells[k][l].getCellVal()) //duplicate cell
+						{
+							return false;
+						}
+
+						if (cells[i][j].getCellVal() > 9) //too big
 						{
 							return false;
 						}

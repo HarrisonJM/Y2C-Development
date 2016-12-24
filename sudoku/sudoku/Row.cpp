@@ -36,7 +36,13 @@ bool Row::CheckAllCellsForCorrect()
 				{
 					continue;
 				}
+
 				if (cells[i].getCellVal() == cells[j].getCellVal()) //duplicate cell
+				{
+					return false;
+				}
+
+				if (cells[i].getCellVal() > 9) //too big
 				{
 					return false;
 				}
