@@ -51,7 +51,7 @@ Board::~Board()
 
 void Board::populateBoard(string name)
 {
-	//program is a vector of strings, chould be cells
+	//program is a vector of strings, could be cells
 	ifstream infile(name);
 	string line;
 	string c;
