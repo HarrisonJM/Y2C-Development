@@ -61,6 +61,7 @@ void SymbolFreq::orderFrequencies()
 {
 	std::map<char, int>::iterator it;
 
+	//iterate over unordered symbols map
 	for (it = unorderedSymbols.begin(); it != unorderedSymbols.end(); ++it)
 	{
 		pairs.push_back(*it); //add counted symbols to a vector of pairs
