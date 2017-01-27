@@ -68,6 +68,7 @@ void SymbolFreq::orderFrequencies()
 	}
 
 	sort(pairs.begin(), pairs.end(), compare); //sort symbols based on value, descending
+	//The order of symbols with the same value doesn't matter as they should have the same bit lengths
 
 }
 
