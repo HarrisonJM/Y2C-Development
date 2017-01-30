@@ -111,12 +111,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp" />
-    <ClCompile Include="Symbol.cpp" />
     <ClCompile Include="SymbolFreq.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source.h" />
-    <ClInclude Include="Symbol.h" />
     <ClInclude Include="SymbolFreq.h" />
   </ItemGroup>
   <ItemGroup>

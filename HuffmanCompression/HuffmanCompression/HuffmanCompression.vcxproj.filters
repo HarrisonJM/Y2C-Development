@@ -21,15 +21,9 @@
     <ClCompile Include="SymbolFreq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Symbol.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Symbol.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="SymbolFreq.h">
