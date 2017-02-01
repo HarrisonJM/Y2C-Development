@@ -1,6 +1,7 @@
 #pragma once
 
 #include "SymbolFreq.h"
+#include "BinTree.h"
 
 /*
 	Class: Source
