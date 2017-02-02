@@ -15,4 +15,6 @@ int main(int argc, char* argv[])
 	//delete SF;
 
 	BinTree* BT = new BinTree(SF->getFrequencies());
+
+	return 0;
 }
