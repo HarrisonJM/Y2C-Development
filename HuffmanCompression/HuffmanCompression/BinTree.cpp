@@ -74,7 +74,7 @@ BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 		exit(0);
 	}	
 
-	delete list;
+	//delete list; //strange behaviour, deletes references to everything
 }
 
 node BinTree::Merge(node &n1, node &n2) //pointer to pointer?
@@ -120,24 +120,57 @@ node BinTree::Merge(node &n1, node &n2) //pointer to pointer?
 
 node BinTree::SetRootNode(node &n1, node &n2)
 {
-	node root;
+	//node root;
 
-	if (n1._freq > n2._freq)
-	{
-		root._left = &n1;
-		root._right = &n2;
-	}
-	else if (n1._freq <= n2._freq)
-	{
-		root._left = &n2;
-		root._right = &n1;
-	}
+	//if (n1._freq > n2._freq)
+	//{
+	//	root._left = &n1;
+	//	root._right = &n2;
+	//}
+	//else if (n1._freq <= n2._freq)
+	//{
+	//	root._left = &n2;
+	//	root._right = &n1;
+	//}
+
+	//return root;
+
+	node root = Merge(n1, n2);
 
 	return root;
 }
 
 void BinTree::PrintTree()
 {
-	//RootNode
-
+	preorderPrint(RootNode);
+	std::cout << "\n\n\n\n\n";
+	postorderPrint(RootNode);
 }
+
+void BinTree::preorderPrint(node * root)
+{
+	// Print all the items in the tree to which root points.
+	// The item in the root is printed first, followed by the
+	// items in the left subtree and then the items in the
+	// right subtree.
+	if (root != NULL) 
+	{  // (Otherwise, there's nothing to print.)
+		std::cout <<  "S: " << root->_symbol << "F: " << root->_freq;      // Print the root item.
+		
+		preorderPrint(root->_left);    // Print items in left subtree.
+		
+		preorderPrint(root->_right);   // Print items in right subtree.
+	}
+} // end preorderPrint()
+
+void BinTree::postorderPrint(node *root) {
+	// Print all the items in the tree to which root points.
+	// The items in the left subtree are printed first, followed 
+	// by the items in the right subtree and then the item in the
+	// root node.
+	if (root != NULL) {  // (Otherwise, there's nothing to print.)
+		postorderPrint(root->_left);    // Print items in left subtree.
+		postorderPrint(root->_right);   // Print items in right subtree.
+		std::cout << "S:" << root->_symbol << " F:" << root->_freq << " ";      // Print the root item.
+	}
+} // end postorderPrint()
