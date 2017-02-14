@@ -5,6 +5,7 @@
 #include <utility>
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 
 struct node
 {
@@ -29,7 +30,8 @@ public:
 
 	node Merge(node &n1, node &n2); //Merges two subtrees, takes two node paramters and creates a new Node which points to the two existing node	
 	node SetRootNode(node &n1, node &n2); //Sets the root node.
-	void PrintTree(node * root);
-
-	node* getRootNode();
+	void PrintTree(); //Prints the Node Tree
+	void preorderPrint(node * root);
+	void postorderPrint(node * root);
+	void postorder(node * p, int indent);
 };

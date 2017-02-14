@@ -101,6 +101,7 @@ node BinTree::Merge(node &n1, node &n2) //pointer to pointer?
 	node newnode;
 
 	newnode._freq = n1._freq + n2._freq;
+	newnode._symbol = '*';
 
 	//largest left := 0
 
@@ -140,19 +141,67 @@ node BinTree::SetRootNode(node &n1, node &n2)
 	return root;
 }
 
-void BinTree::PrintTree(node* root)
+void BinTree::PrintTree()
 {
-	if (root != NULL)
-	{
-		PrintTree(root->_left); // Print items in left subtree.
+	postorder(RootNode, 0);
 
-		PrintTree(root->_right); // Print items in right subtree.
-
-		std::cout << "S:" << root->_symbol << " F:" << root->_freq << " ";
-	}
+	exit(0);
 }
 
-node * BinTree::getRootNode()
+void BinTree::preorderPrint(node * root)
 {
-	return RootNode;
+	// Print all the items in the tree to which root points.
+	// The item in the root is printed first, followed by the
+	// items in the left subtree and then the items in the
+	// right subtree.
+	if (root != NULL) 
+	{  // (Otherwise, there's nothing to print.)
+		std::cout <<  "S: " << root->_symbol << "F: " << root->_freq;      // Print the root item.
+		
+		preorderPrint(root->_left);    // Print items in left subtree.
+		
+		preorderPrint(root->_right);   // Print items in right subtree.
+	}
+} // end preorderPrint()
+
+void BinTree::postorderPrint(node *root) {
+	// Print all the items in the tree to which root points.
+	// The items in the left subtree are printed first, followed 
+	// by the items in the right subtree and then the item in the
+	// root node.
+	if (root != NULL) {  // (Otherwise, there's nothing to print.)
+		postorderPrint(root->_left);    // Print items in left subtree.
+		postorderPrint(root->_right);   // Print items in right subtree.
+		std::cout << "S:" << root->_symbol << " F:" << root->_freq << " ";      // Print the root item.
+	}
+} // end postorderPrint()
+
+void BinTree::postorder(node* p, int indent = 0)
+{
+	if (p != NULL) 
+	{
+		if (p->_right) //Traverse right side
+		{
+			postorder(p->_right, indent + 4);
+		}
+
+		if (indent) 
+		{
+			std::cout << std::setw(indent) << ' ';
+		}
+
+		if (p->_right)
+		{
+			std::cout << " /\n" << std::setw(indent) << ' ';
+		}
+
+		
+		std::cout << p->_freq << "\n ";
+
+		if (p->_left) 
+		{
+			std::cout << std::setw(indent) << ' ' << " \\\n";
+			postorder(p->_left, indent + 4);
+		}
+	}
 }
