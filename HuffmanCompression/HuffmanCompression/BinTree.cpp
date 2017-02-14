@@ -101,6 +101,7 @@ node BinTree::Merge(node &n1, node &n2) //pointer to pointer?
 	node newnode;
 
 	newnode._freq = n1._freq + n2._freq;
+	newnode._symbol = '*';
 
 	//largest left := 0
 
@@ -142,9 +143,9 @@ node BinTree::SetRootNode(node &n1, node &n2)
 
 void BinTree::PrintTree()
 {
-	preorderPrint(RootNode);
-	std::cout << "\n\n\n\n\n";
-	postorderPrint(RootNode);
+	postorder(RootNode, 0);
+
+	exit(0);
 }
 
 void BinTree::preorderPrint(node * root)
@@ -174,3 +175,33 @@ void BinTree::postorderPrint(node *root) {
 		std::cout << "S:" << root->_symbol << " F:" << root->_freq << " ";      // Print the root item.
 	}
 } // end postorderPrint()
+
+void BinTree::postorder(node* p, int indent = 0)
+{
+	if (p != NULL) 
+	{
+		if (p->_right) //Traverse right side
+		{
+			postorder(p->_right, indent + 4);
+		}
+
+		if (indent) 
+		{
+			std::cout << std::setw(indent) << ' ';
+		}
+
+		if (p->_right)
+		{
+			std::cout << " /\n" << std::setw(indent) << ' ';
+		}
+
+		
+		std::cout << p->_freq << "\n ";
+
+		if (p->_left) 
+		{
+			std::cout << std::setw(indent) << ' ' << " \\\n";
+			postorder(p->_left, indent + 4);
+		}
+	}
+}

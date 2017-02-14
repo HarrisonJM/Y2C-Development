@@ -5,6 +5,7 @@
 #include <utility>
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 
 struct node
 {
@@ -32,4 +33,5 @@ public:
 	void PrintTree(); //Prints the Node Tree
 	void preorderPrint(node * root);
 	void postorderPrint(node * root);
+	void postorder(node * p, int indent);
 };
