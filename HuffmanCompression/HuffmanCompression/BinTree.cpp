@@ -140,37 +140,19 @@ node BinTree::SetRootNode(node &n1, node &n2)
 	return root;
 }
 
-void BinTree::PrintTree()
+void BinTree::PrintTree(node* root)
 {
-	preorderPrint(RootNode);
-	std::cout << "\n\n\n\n\n";
-	postorderPrint(RootNode);
+	if (root != NULL)
+	{
+		PrintTree(root->_left); // Print items in left subtree.
+
+		PrintTree(root->_right); // Print items in right subtree.
+
+		std::cout << "S:" << root->_symbol << " F:" << root->_freq << " ";
+	}
 }
 
-void BinTree::preorderPrint(node * root)
+node * BinTree::getRootNode()
 {
-	// Print all the items in the tree to which root points.
-	// The item in the root is printed first, followed by the
-	// items in the left subtree and then the items in the
-	// right subtree.
-	if (root != NULL) 
-	{  // (Otherwise, there's nothing to print.)
-		std::cout <<  "S: " << root->_symbol << "F: " << root->_freq;      // Print the root item.
-		
-		preorderPrint(root->_left);    // Print items in left subtree.
-		
-		preorderPrint(root->_right);   // Print items in right subtree.
-	}
-} // end preorderPrint()
-
-void BinTree::postorderPrint(node *root) {
-	// Print all the items in the tree to which root points.
-	// The items in the left subtree are printed first, followed 
-	// by the items in the right subtree and then the item in the
-	// root node.
-	if (root != NULL) {  // (Otherwise, there's nothing to print.)
-		postorderPrint(root->_left);    // Print items in left subtree.
-		postorderPrint(root->_right);   // Print items in right subtree.
-		std::cout << "S:" << root->_symbol << " F:" << root->_freq << " ";      // Print the root item.
-	}
-} // end postorderPrint()
+	return RootNode;
+}

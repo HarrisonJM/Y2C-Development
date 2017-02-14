@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
 	BinTree* BT = new BinTree(SF->getFrequencies());
 
-	BT->PrintTree();
+	BT->PrintTree(BT->getRootNode());
 
 	system("pause");
 
