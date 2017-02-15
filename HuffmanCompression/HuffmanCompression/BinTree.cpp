@@ -144,8 +144,6 @@ node BinTree::SetRootNode(node &n1, node &n2)
 void BinTree::PrintTree()
 {
 	postorder(RootNode, 0);
-
-	exit(0);
 }
 
 void BinTree::preorderPrint(node * root)
@@ -176,32 +174,32 @@ void BinTree::postorderPrint(node *root) {
 	}
 } // end postorderPrint()
 
-void BinTree::postorder(node* p, int indent = 0)
+
+void BinTree::postorder(node* leaf, int indent = 0)
 {
-	if (p != NULL) 
+	if (leaf != NULL)
 	{
-		if (p->_right) //Traverse right side
+		if (leaf->_right) //Traverse right side
 		{
-			postorder(p->_right, indent + 4);
+			postorder(leaf->_right, indent + 4);
 		}
 
-		if (indent) 
+		if (indent)
 		{
-			std::cout << std::setw(indent) << ' ';
+			std::cout << std::setw(indent) << ' '; //pad with indent amount of spaces
 		}
 
-		if (p->_right)
+		if (leaf->_right)
 		{
-			std::cout << " /\n" << std::setw(indent) << ' ';
+			std::cout << " /\n" << std::setw(indent) << ' '; //insert / for the left leaf
 		}
-
 		
-		std::cout << p->_freq << "\n ";
+		std::cout << leaf->_freq << "\n "; //print frequency
 
-		if (p->_left) 
+		if (leaf->_left)  //traverse left
 		{
 			std::cout << std::setw(indent) << ' ' << " \\\n";
-			postorder(p->_left, indent + 4);
+			postorder(leaf->_left, indent + 4);
 		}
 	}
 }
