@@ -20,6 +20,9 @@ class BinTree
 {
 private:
 	node * RootNode;
+	std::vector<node*>* list;
+
+	void m_print(node * p, int indent);
 
 public:
 	BinTree(); //Default
@@ -28,10 +31,7 @@ public:
 
 	~BinTree();
 
-	node Merge(node &n1, node &n2); //Merges two subtrees, takes two node paramters and creates a new Node which points to the two existing node	
-	node SetRootNode(node &n1, node &n2); //Sets the root node.
-	void PrintTree(); //Prints the Node Tree
-	void preorderPrint(node * root);
-	void postorderPrint(node * root);
-	void postorder(node * p, int indent);
+	node* Merge(node *n1, node *n2); //Merges two subtrees, takes two node paramters and creates a new Node which points to the two existing node	
+	node * SetRootNode(node * n1, node * n2);
+	void PrintTree(); //Prints the Node Tree	
 };

@@ -8,7 +8,9 @@ bool compare(const pair<int, int>&i, const pair<int, int>&j)
 	return i.second > j.second;
 }
 
-//Default Constructor
+/// <summary>
+/// 
+/// </summary>
 SymbolFreq::SymbolFreq()
 {
 
@@ -38,10 +40,10 @@ SymbolFreq::SymbolFreq(std::string name)
 		}
 	}
 
-	delete temp;
-
 	orderFrequencies(unorderedSymbols); //re-order the frequencies, descending second value
+
 	delete unorderedSymbols;
+	delete temp;
 
 	PrintCharacterFreq();
 }
@@ -51,7 +53,12 @@ SymbolFreq::~SymbolFreq()
 	delete pairs;
 }
 
-//opens file at name and copies each char one by one into a vector
+
+/// <summary>
+/// opens file at name and copies each char one by one into a vector
+/// </summary>
+/// <param name="name"></param>
+/// <param name="temp"></param>
 void SymbolFreq::OpenFile(string name, std::vector<char>* temp)
 {
 	char ch; 

@@ -3,42 +3,43 @@
 using namespace std;
 
 //Operation Functor used for sort() function
-bool compare(const node &i, const node &j)
+bool compare(const node *i, const node *j)
 {
-	return i._freq > j._freq;
+	return i->_freq > j->_freq;
 }
 
 BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 {
 	//Variables
-	std::vector<node>* list = new std::vector<node>;
+	list = new std::vector<node*>;
 	RootNode = new node;
 
 	//iterators
-	std::vector<std::pair<char, int>>::iterator it;
-	std::vector<node>::reverse_iterator iter, itersp; //end node iterators
-	std::vector<node>::iterator nbeg, nend; //begin and end iterators for sort
-
-	//temporary nodes
-	node tempnode;
-	node initnode;
-
-	//initilise temporary nodes
-	initnode._left = NULL;
-	initnode._right = NULL;
-	initnode._code = "";
+	std::vector<std::pair<char, int>>::iterator it;	
 
 	for (it = freqs->begin(); it != freqs->end(); ++it) //Fill up all nodes
 	{
+		//temporary nodes
+		node *initnode = new node;
+		//initilise temporary nodes
+		initnode->_left = NULL;
+		initnode->_right = NULL;
+		initnode->_code = "";
+
 		//Fill temporary nodes, with symbols and frequencies
-		initnode._freq = it->second;
-		initnode._symbol = it->first;
+		initnode->_freq = it->second;
+		initnode->_symbol = it->first;
 		
 		list->push_back(initnode);
+
+		//delete initnode;
 	}
+
+	std::vector<node*>::reverse_iterator iter, itersp; //end node iterators
 
 	while (list->size() > 2)
 	{
+		node *tempnode = new node;
 		iter = list->rbegin(); //iterator starting from end, lowest frequencies
 		itersp = iter++;
 
@@ -48,6 +49,7 @@ BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 		list->pop_back();
 		list->push_back(tempnode); //push new node back onto vector
 
+		std::vector<node*>::iterator nbeg, nend; //begin and end iterators for sort
 		nbeg = list->begin();
 		nend = list->end();
 
@@ -60,11 +62,11 @@ BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 	//Creates Root node
 	if (list->size() == 2)
 	{
-		*RootNode = SetRootNode(*iter, *itersp);
+		RootNode = SetRootNode(*iter, *itersp);
 	}
 	else if (list->size() == 1)
 	{
-		*RootNode = *iter;
+		RootNode = *iter;
 	}
 	else
 	{
@@ -77,111 +79,59 @@ BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 	//delete list; //strange behaviour, deletes references to everything
 }
 
-node BinTree::Merge(node &n1, node &n2) //pointer to pointer?
+BinTree::~BinTree()
 {
-	//node* newnode = new node;
+	for (int i = 0; i < list->size(); ++i)
+	{
+		delete &list[i];
+	}
 
-	//newnode->_freq = n1._freq + n2._freq;
+	delete RootNode;
+}
 
-	////largest left := 0
+node* BinTree::Merge(node *n1, node *n2)
+{
+	node* newnode = new node;
 
-	//if (n1._freq > n2._freq)
-	//{
-	//	newnode->_left = &n1;
-	//	newnode->_right = &n2;
-	//}
-	//else if (n1._freq <= n2._freq)
-	//{
-	//	newnode->_left = &n2;
-	//	newnode->_right = &n1;
-	//}
-
-	//return *newnode;
-
-	node newnode;
-
-	newnode._freq = n1._freq + n2._freq;
-	newnode._symbol = '*';
+	newnode->_freq = n1->_freq + n2->_freq;
+	newnode->_symbol = '*';
 
 	//largest left := 0
 
-	if (n1._freq > n2._freq)
+	if (n1->_freq > n2->_freq)
 	{
-		newnode._left = &n1;
-		newnode._right = &n2;
+		newnode->_left = n1;
+		newnode->_right = n2;
 	}
-	else if (n1._freq <= n2._freq)
+	else if (n1->_freq <= n2->_freq)
 	{
-		newnode._left = &n2;
-		newnode._right = &n1;
+		newnode->_left = n2;
+		newnode->_right = n1;
 	}
 
 	return newnode;
 }
 
-node BinTree::SetRootNode(node &n1, node &n2)
+node* BinTree::SetRootNode(node *n1, node *n2)
 {
-	//node root;
 
-	//if (n1._freq > n2._freq)
-	//{
-	//	root._left = &n1;
-	//	root._right = &n2;
-	//}
-	//else if (n1._freq <= n2._freq)
-	//{
-	//	root._left = &n2;
-	//	root._right = &n1;
-	//}
-
-	//return root;
-
-	node root = Merge(n1, n2);
+	node* root = Merge(n1, n2);
 
 	return root;
 }
 
 void BinTree::PrintTree()
 {
-	postorder(RootNode, 0);
+	m_print(RootNode, 0);
 }
 
-void BinTree::preorderPrint(node * root)
-{
-	// Print all the items in the tree to which root points.
-	// The item in the root is printed first, followed by the
-	// items in the left subtree and then the items in the
-	// right subtree.
-	if (root != NULL) 
-	{  // (Otherwise, there's nothing to print.)
-		std::cout <<  "S: " << root->_symbol << "F: " << root->_freq;      // Print the root item.
-		
-		preorderPrint(root->_left);    // Print items in left subtree.
-		
-		preorderPrint(root->_right);   // Print items in right subtree.
-	}
-} // end preorderPrint()
-
-void BinTree::postorderPrint(node *root) {
-	// Print all the items in the tree to which root points.
-	// The items in the left subtree are printed first, followed 
-	// by the items in the right subtree and then the item in the
-	// root node.
-	if (root != NULL) {  // (Otherwise, there's nothing to print.)
-		postorderPrint(root->_left);    // Print items in left subtree.
-		postorderPrint(root->_right);   // Print items in right subtree.
-		std::cout << "S:" << root->_symbol << " F:" << root->_freq << " ";      // Print the root item.
-	}
-} // end postorderPrint()
-
-
-void BinTree::postorder(node* leaf, int indent = 0)
+void BinTree::m_print(node* leaf, int indent = 0)
 {
 	if (leaf != NULL)
 	{
 		if (leaf->_right) //Traverse right side
 		{
-			postorder(leaf->_right, indent + 4);
+			m_print(leaf->_right, indent + 4);
 		}
 
 		if (indent)
@@ -199,7 +149,7 @@ void BinTree::postorder(node* leaf, int indent = 0)
 		if (leaf->_left)  //traverse left
 		{
 			std::cout << std::setw(indent) << ' ' << " \\\n";
-			postorder(leaf->_left, indent + 4);
+			m_print(leaf->_left, indent + 4);
 		}
 	}
 }

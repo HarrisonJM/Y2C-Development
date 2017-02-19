@@ -21,10 +21,10 @@
     <ClCompile Include="SymbolFreq.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="temp.cpp">
+    <ClCompile Include="BinTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="BinTree.cpp">
+    <ClCompile Include="HuffmanCodeTree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -36,6 +36,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BinTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HuffmanCodeTree.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

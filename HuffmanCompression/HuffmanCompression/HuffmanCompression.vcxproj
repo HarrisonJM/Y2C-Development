@@ -111,12 +111,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BinTree.cpp" />
+    <ClCompile Include="HuffmanCodeTree.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="SymbolFreq.cpp" />
-    <ClCompile Include="temp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BinTree.h" />
+    <ClInclude Include="HuffmanCodeTree.h" />
     <ClInclude Include="Source.h" />
     <ClInclude Include="SymbolFreq.h" />
   </ItemGroup>
