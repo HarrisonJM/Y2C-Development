@@ -8,13 +8,16 @@
 #include <algorithm>    // std::sort
 #include <functional>
 
-/*
-	Class:			SymbolFreq
-	Description:	When supplied with a file name, will store, count and sort,
-					the symbols in that file for use later on in the Hoffman compression
-	Constructors:	Default: Does nothing don't use
-					SymbolFreq(std::string name): name is file path, always use this
-*/
+/// <summary>
+/// Class:			SymbolFreq
+/// Description:	When supplied with a file name, will store, count and sort,
+/// 				the symbols in that file for use later on in the Hoffman compression
+/// Constructors:	Default: Does nothing don't use
+/// 				SymbolFreq(std::string name): name is file path, always use this
+/// 
+/// Methods:		PrintChracterFreq();
+/// 				getFrequencies();
+/// </summary>
 class SymbolFreq
 {
 private:

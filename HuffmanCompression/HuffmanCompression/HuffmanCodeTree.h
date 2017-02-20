@@ -3,15 +3,22 @@
 #include <queue>
 #include "BinTree.h"
 
+/// <summary>
+/// Struct used to store a functor for use in the pirority queue
+/// </summary>
 struct nodeCmp
 {
-	bool operator()(const node* a, const
-		node* b)
+	bool operator()(const node* a, const node* b)
 	{
 		return a->_freq > b->_freq; //sorts with highest frequency first
 	}
 };
 
+/// <summary>
+/// Class:			HuffmanCodeTree
+/// Description:	Takes a vector<pair<char, int> and generates a series of huffman codes for compression
+/// Constructors:	std::vector<std::pair<char, int>>* freqs
+/// </summary>
 class HuffmanCodeTree
 {
 private:
@@ -21,6 +28,8 @@ private:
 
 	//methods
 	void BuildTree();
+	void traverse(node* leaf, int indent);
+	void BuildHuffmanCode(node * leaf, std::string code);
 
 public:
 
@@ -28,7 +37,5 @@ public:
 	HuffmanCodeTree(std::vector<std::pair<char, int>>* freqs);
 
 	~HuffmanCodeTree();
-
-	void BuildHuffmanCode(node * leaf, std::string code);
-
+	void PrintCodeTree();
 };

@@ -15,19 +15,20 @@ static bool compare(const pair<int, int>&i, const pair<int, int>&j)
 int main(int argc, char* argv[])
 {
 	SymbolFreq* SF = new SymbolFreq("ToCompress.txt"); //Symbol Frequency object
-	writetofile(SF->getFrequencies());
+	writetofile(SF->getFrequencies()); //Write values to a file for testing purposes
 
 	delete SF;
 
-	std::vector<std::pair<char, int>> *things;// = new std::vector<std::pair<char, int>>;
-	things = readfromfile();
+	std::vector<std::pair<char, int>> *data;
+	data = readfromfile(); //write testing file into vector
 
-	BinTree* BT = new BinTree(things);
+	BinTree* BT = new BinTree(data); //BinTree proof
 	BT->PrintTree();
 
 	delete BT;
 
-	HuffmanCodeTree *PQ = new HuffmanCodeTree(things);
+	HuffmanCodeTree *PQ = new HuffmanCodeTree(data); //Binary tree developed with a priority queue
+	PQ->PrintCodeTree();
 
 	delete PQ;
 
@@ -35,19 +36,26 @@ int main(int argc, char* argv[])
 }
 
 
-//writes data to file for testing and use between different projects
-void writetofile(std::vector<std::pair<char, int>>* things)
+/// <summary>
+/// //writes data to file for testing and use between different projects
+/// </summary>
+/// <param name="data"></param>
+void writetofile(std::vector<std::pair<char, int>>* data)
 {
 	std::vector<std::pair<char, int>>::iterator iter;
 	ofstream outputfile("Data", ios::out, ios::binary);
 
-	for (iter = things->begin(); iter != things->end(); ++iter)
+	for (iter = data->begin(); iter != data->end(); ++iter)
 	{
-		outputfile << (int)iter->first << " " << iter->second << "\n";
+		//writes the characters to the file as numbers so that ' ' isn't ignored
+		outputfile << (int)iter->first << " " << iter->second << "\n"; 
 	}
 }
 
-//reads a file into a vector of pairs for use in other areas of the program
+/// <summary>
+/// //reads a file into a vector of pairs for use in other areas of the program
+/// </summary>
+/// <returns> std::vector<std::pair<char, int>>* </returns>
 std::vector<std::pair<char, int>>* readfromfile()
 {	
 	std::vector<std::pair<char, int>>* vec = new std::vector<std::pair<char, int>>;

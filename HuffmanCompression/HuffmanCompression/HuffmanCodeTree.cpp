@@ -43,7 +43,9 @@ void HuffmanCodeTree::BuildHuffmanCode(node* leaf, std::string code)
 
 		if (leaf->_right != NULL)
 		{
+			code.pop_back();
 			code += '1';
+
 			BuildHuffmanCode(leaf->_right, code);
 		}
 
@@ -83,4 +85,46 @@ void HuffmanCodeTree::BuildTree()
 	PQ->pop();
 
 	delete PQ;
+}
+
+void HuffmanCodeTree::PrintCodeTree()
+{
+	if (root->_left == NULL && root->_right == NULL)
+	{
+		std::cout << "Tree is empty!" << std::endl;
+	}
+	else
+	{
+		traverse(root, 0);
+	}
+}
+
+//void HuffmanCodeTree::traverse(node* leaf, int indent = 0);
+void HuffmanCodeTree::traverse(node* leaf, int indent = 0)
+{
+	if (leaf != NULL)
+	{
+		if (leaf->_right) //Traverse right side
+		{
+			traverse(leaf->_right, indent + 4);
+		}
+
+		if (indent)
+		{
+			std::cout << std::setw(indent) << ' '; //pad with indent amount of spaces
+		}
+
+		if (leaf->_right)
+		{
+			std::cout << " /\n" << std::setw(indent) << ' '; //insert / for the left leaf
+		}
+
+		std::cout << leaf->_code << "\n "; //print frequency
+
+		if (leaf->_left)  //traverse left
+		{
+			std::cout << std::setw(indent) << ' ' << " \\\n";
+			traverse(leaf->_left, indent + 4);
+		}
+	}
 }

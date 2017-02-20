@@ -10,10 +10,10 @@
 #include "BinTree.h"
 #include "HuffmanCodeTree.h"
 
-/*
-	Class: Source
-	Description: Generic header for source.cpp
-*/
+/// <summary>
+/// Class: Source
+/// Description: Generic header for source.cpp
+/// </summary>
 
 void writetofile(std::vector<std::pair<char, int>>* things);
 std::vector<std::pair<char, int>>* readfromfile();

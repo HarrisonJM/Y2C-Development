@@ -7,6 +7,9 @@
 #include <iostream>
 #include <iomanip>
 
+/// <summary>
+/// the node struct that is used for building the binary tree
+/// </summary>
 struct node
 {
 	node* _left;
@@ -16,6 +19,9 @@ struct node
 	std::string _code;
 };
 
+/// <summary>
+/// 
+/// </summary>
 class BinTree
 {
 private:
