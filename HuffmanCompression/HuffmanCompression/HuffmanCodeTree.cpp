@@ -4,12 +4,17 @@ HuffmanCodeTree::HuffmanCodeTree()
 {
 }
 
+/// <summary>
+/// Constructor for HuffmanCodeTree. Builds the entire huffman binary tree and then
+/// fills the end nodes with their respetive huffman codes
+/// </summary>
+/// <param name="freqs"></param>
 HuffmanCodeTree::HuffmanCodeTree(std::vector<std::pair<char, int>>* freqs)
 {
 	PQ = new std::priority_queue<node*, std::vector<node*>, nodeCmp>; //dynamic priority queue
 	std::vector<std::pair<char, int>>::iterator iter;
 
-	for (iter = freqs->begin(); iter != freqs->end(); ++iter)
+	for (iter = freqs->begin(); iter != freqs->end(); ++iter) //Iterate over vector and fill priority queue
 	{
 		node* tn = new node; //temp node
 		tn->_code = "";
@@ -29,6 +34,7 @@ HuffmanCodeTree::HuffmanCodeTree(std::vector<std::pair<char, int>>* freqs)
 
 HuffmanCodeTree::~HuffmanCodeTree()
 {
+	//TODO: DESTRUCTOR
 }
 
 void HuffmanCodeTree::BuildHuffmanCode(node* leaf, std::string code)

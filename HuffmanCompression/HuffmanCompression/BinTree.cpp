@@ -2,12 +2,22 @@
 
 using namespace std;
 
-//Operation Functor used for sort() function
+/// <summary>
+/// Operation Functor used for sort() function
+/// </summary>
+/// <param name="i"></param>
+/// <param name="j"></param>
+/// <returns></returns>
 bool compare(const node *i, const node *j)
 {
 	return i->_freq > j->_freq;
 }
 
+/// <summary>
+/// Main constructor for BinaryTree, takes a pointer to a vector of pairs of char, int
+/// Constructs the entire Binary tree using the vector it is given
+/// </summary>
+/// <param name="freqs">std::vector<std::pair<char, int>>*</param>
 BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 {
 	//Variables
@@ -79,6 +89,9 @@ BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 	//delete list; //strange behaviour, deletes references to everything
 }
 
+/// <summary>
+/// Destructor
+/// </summary>
 BinTree::~BinTree()
 {
 	for (int i = 0; i < list->size(); ++i)
@@ -89,6 +102,12 @@ BinTree::~BinTree()
 	delete RootNode;
 }
 
+/// <summary>
+/// Merges two nodes based on their size
+/// </summary>
+/// <param name="n1"></param>
+/// <param name="n2"></param>
+/// <returns>node*</returns>
 node* BinTree::Merge(node *n1, node *n2)
 {
 	node* newnode = new node;
@@ -112,6 +131,12 @@ node* BinTree::Merge(node *n1, node *n2)
 	return newnode;
 }
 
+/// <summary>
+/// Sets the root node
+/// </summary>
+/// <param name="n1"></param>
+/// <param name="n2"></param>
+/// <returns>node*</returns>
 node* BinTree::SetRootNode(node *n1, node *n2)
 {
 
@@ -120,11 +145,19 @@ node* BinTree::SetRootNode(node *n1, node *n2)
 	return root;
 }
 
+/// <summary>
+/// Public facing method for printing the Binary tree
+/// </summary>
 void BinTree::PrintTree()
 {
 	m_print(RootNode, 0);
 }
 
+/// <summary>
+/// Uses recursion to print the frequencies stored in the binary tree.
+/// </summary>
+/// <param name="leaf"></param>
+/// <param name="indent"></param>
 void BinTree::m_print(node* leaf, int indent = 0)
 {
 	if (leaf != NULL)

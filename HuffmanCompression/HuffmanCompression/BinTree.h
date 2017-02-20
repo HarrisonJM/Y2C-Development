@@ -20,7 +20,7 @@ struct node
 };
 
 /// <summary>
-/// 
+/// BinTree Class for task 2
 /// </summary>
 class BinTree
 {
@@ -33,7 +33,7 @@ private:
 public:
 	BinTree(); //Default
 
-	BinTree(std::vector<std::pair<char,int>>* freqs); //requires fequencies to be passed in
+	BinTree(std::vector<std::pair<char, int>>* freqs); //requires fequencies to be passed in
 
 	~BinTree();
 

@@ -6,12 +6,6 @@
 
 using namespace std;
 
-//Operation Functor used for sort() function
-static bool compare(const pair<int, int>&i, const pair<int, int>&j)
-{
-	return i.second > j.second;
-}
-
 int main(int argc, char* argv[])
 {
 	SymbolFreq* SF = new SymbolFreq("ToCompress.txt"); //Symbol Frequency object

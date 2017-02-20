@@ -16,7 +16,7 @@ struct nodeCmp
 
 /// <summary>
 /// Class:			HuffmanCodeTree
-/// Description:	Takes a vector<pair<char, int> and generates a series of huffman codes for compression
+/// Description:	Takes a vector of pairs of char, int and generates a series of huffman codes for compression
 /// Constructors:	std::vector<std::pair<char, int>>* freqs
 /// </summary>
 class HuffmanCodeTree
