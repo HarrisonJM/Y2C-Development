@@ -26,73 +26,90 @@ HuffmanCodeTree::HuffmanCodeTree(std::vector<std::pair<char, int>>* freqs)
 		PQ->push(tn); //calling pop() will delete the node
 	}
 
-	BuildTree();
-	BuildHuffmanCode(root, "");
+	m_BuildTree();
+	m_BuildHuffmanCode(root, "");
 
 	delete freqs;
 }
 
 HuffmanCodeTree::~HuffmanCodeTree()
 {
-	//TODO: DESTRUCTOR
+	delete root; //node has a destructor
 }
 
-void HuffmanCodeTree::BuildHuffmanCode(node* leaf, std::string code)
+/// <summary>
+/// Builds huffman code from the tree built earlier.
+/// Must be supplied with a blank string or ""
+/// </summary>
+/// <param name="leaf"></param>
+/// <param name="code"></param>
+void HuffmanCodeTree::m_BuildHuffmanCode(node* leaf, std::string code)
 {
 	if (leaf != NULL)
 	{
 		if (leaf->_left != NULL) //left is 0
 		{
-			code += '0';
-			BuildHuffmanCode(leaf->_left, code);
+			code += '0'; //add 0 if going left
+			m_BuildHuffmanCode(leaf->_left, code);
 		}
 
 		if (leaf->_right != NULL)
 		{
-			code.pop_back();
-			code += '1';
+			code.pop_back(); //pop off last character due to recursion
+			code += '1'; //1 for going right
 
-			BuildHuffmanCode(leaf->_right, code);
+			m_BuildHuffmanCode(leaf->_right, code);
 		}
 
 		if (leaf->_left == NULL && leaf->_right == NULL)
 		{
-			leaf->_code = code;
+			leaf->_code = code; //When the end node is reached, set its code to that gathered
 		}
 	}
 
 	return;
 }
 
-void HuffmanCodeTree::BuildTree()
+/// <summary>
+/// Builds the Huffman tree using the priority queue
+/// </summary>
+void HuffmanCodeTree::m_BuildTree()
 {
 	while (PQ->size() > 1)
 	{
 		node* tn = new node;
-		node* tn2 = new node;
-		node* leaf = new node;
+		node* tn2 = new node; //temp nodes
+
+		node* leaf = new node; //new node
 
 		tn = PQ->top();	
-		PQ->pop();
-
-		tn2 = PQ->top();
-		PQ->pop();
-
-		leaf->_left = tn;
-		leaf->_right = tn2;
-		leaf->_freq = tn2->_freq + tn->_freq;
-
-		PQ->push(leaf);
+		PQ->pop(); //can only access other items in queue from the front
+													  
+		tn2 = PQ->top();							  
+		PQ->pop();									  
+		
+		//The first item taken off the top of the queue is always the lowest, so no checkign is needed
+		//in the case of equal frequencies, no preference
+		leaf->_left = tn;							  
+		leaf->_right = tn2;							  
+		leaf->_freq = tn2->_freq + tn->_freq; //Add frequencies together for new node
+		
+		PQ->push(leaf); //push new node into queue to be sorted and placed
 	}
 
 	root = new node;
 
+	//Last node is the root
 	root = PQ->top();
 	PQ->pop();
 
+	//No longer needed
 	delete PQ;
 }
 
+/// <summary>
+/// Outward facing method
+/// </summary>
 void HuffmanCodeTree::PrintCodeTree()
 {
 	if (root->_left == NULL && root->_right == NULL)
@@ -101,18 +118,22 @@ void HuffmanCodeTree::PrintCodeTree()
 	}
 	else
 	{
-		traverse(root, 0);
+		m_Traverse(root, 0);
 	}
 }
 
-//void HuffmanCodeTree::traverse(node* leaf, int indent = 0);
-void HuffmanCodeTree::traverse(node* leaf, int indent = 0)
+/// <summary>
+/// Method used to actually traverse tree
+/// </summary>
+/// <param name="leaf"></param>
+/// <param name="indent"></param>
+void HuffmanCodeTree::m_Traverse(node* leaf, int indent = 0)
 {
 	if (leaf != NULL)
 	{
 		if (leaf->_right) //Traverse right side
 		{
-			traverse(leaf->_right, indent + 4);
+			m_Traverse(leaf->_right, indent + 4);
 		}
 
 		if (indent)
@@ -130,7 +151,7 @@ void HuffmanCodeTree::traverse(node* leaf, int indent = 0)
 		if (leaf->_left)  //traverse left
 		{
 			std::cout << std::setw(indent) << ' ' << " \\\n";
-			traverse(leaf->_left, indent + 4);
+			m_Traverse(leaf->_left, indent + 4);
 		}
 	}
 }

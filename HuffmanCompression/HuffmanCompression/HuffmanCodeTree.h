@@ -27,15 +27,17 @@ private:
 	node* root;
 
 	//methods
-	void BuildTree();
-	void traverse(node* leaf, int indent);
-	void BuildHuffmanCode(node * leaf, std::string code);
+	void m_BuildTree();
+	void m_Traverse(node* leaf, int indent);
+	void m_BuildHuffmanCode(node * leaf, std::string code);
 
 public:
-
+	//Constructors/destructors
 	HuffmanCodeTree();
 	HuffmanCodeTree(std::vector<std::pair<char, int>>* freqs);
 
 	~HuffmanCodeTree();
+
+	//Methods
 	void PrintCodeTree();
 };

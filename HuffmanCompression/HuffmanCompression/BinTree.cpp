@@ -27,22 +27,21 @@ BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 	//iterators
 	std::vector<std::pair<char, int>>::iterator it;	
 
-	for (it = freqs->begin(); it != freqs->end(); ++it) //Fill up all nodes
+	for (it = freqs->begin(); it != freqs->end(); ++it) //initialise nodes
 	{
 		//temporary nodes
-		node *initnode = new node;
-		//initilise temporary nodes
-		initnode->_left = NULL;
-		initnode->_right = NULL;
-		initnode->_code = "";
+		node *tempnode = new node;
 
-		//Fill temporary nodes, with symbols and frequencies
-		initnode->_freq = it->second;
-		initnode->_symbol = it->first;
+		//initilise temporary node
+		tempnode->_left = NULL;
+		tempnode->_right = NULL;
+		tempnode->_code = "";
+
+		//Fill temporary node, with symbols and frequencies
+		tempnode->_freq = it->second;
+		tempnode->_symbol = it->first;
 		
-		list->push_back(initnode);
-
-		//delete initnode;
+		list->push_back(tempnode);
 	}
 
 	std::vector<node*>::reverse_iterator iter, itersp; //end node iterators
@@ -84,9 +83,7 @@ BinTree::BinTree(std::vector<std::pair<char, int>>* freqs)
 		std::cout << "Incorrect number of nodes. Exiting. Fundamental issue somewhere else." << std::endl;
 		system("pause");
 		exit(0);
-	}	
-
-	//delete list; //strange behaviour, deletes references to everything
+	}
 }
 
 /// <summary>
@@ -139,7 +136,6 @@ node* BinTree::Merge(node *n1, node *n2)
 /// <returns>node*</returns>
 node* BinTree::SetRootNode(node *n1, node *n2)
 {
-
 	node* root = Merge(n1, n2);
 
 	return root;

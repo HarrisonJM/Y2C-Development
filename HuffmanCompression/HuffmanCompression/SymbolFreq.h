@@ -25,17 +25,17 @@ private:
 	std::vector<std::pair<char, int>>* pairs;
 
 	//Member Functions
-	void OpenFile(std::string name, std::vector<char>* temp);
-	void orderFrequencies(std::map<char, int>* unorderedSymbols);
+	void m_OpenFile(std::string name, std::vector<char>* temp);
+	void m_OrderFrequencies(std::map<char, int>* unorderedSymbols);
 
 public:
-
+	//Constructos/destructors
 	SymbolFreq();
 	SymbolFreq(std::string name);
 
 	~SymbolFreq();
 
+	//Methods
 	void PrintCharacterFreq();
-
 	std::vector<std::pair<char, int>>* getFrequencies();
 };

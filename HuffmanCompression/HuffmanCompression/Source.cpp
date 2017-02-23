@@ -6,10 +6,16 @@
 
 using namespace std;
 
+/// <summary>
+/// Main entry point for program
+/// </summary>
+/// <param name="argc"></param>
+/// <param name="argv"></param>
+/// <returns></returns>
 int main(int argc, char* argv[])
 {
-	SymbolFreq* SF = new SymbolFreq("ToCompress.txt"); //Symbol Frequency object
-	writetofile(SF->getFrequencies()); //Write values to a file for testing purposes
+	SymbolFreq* SF = new SymbolFreq("ToCompress.txt"); //File that needs compressing
+	writetofile(SF->getFrequencies()); //Write values to a file for testing purposes, i.e. other tasks
 
 	delete SF;
 
@@ -63,7 +69,7 @@ std::vector<std::pair<char, int>>* readfromfile()
 	{
 		pair<char, int> pa;
 
-		pa.first = (char)key;
+		pa.first = (char)key; //chracters saved as ASCII code, so it needs casting
 		pa.second = value;
 
 		vec->push_back(pa);

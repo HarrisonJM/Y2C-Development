@@ -2,7 +2,12 @@
 
 using namespace std;
 
-//Operation Functor used for sort() function
+/// <summary>
+/// Functor used for sort() function
+/// </summary>
+/// <param name="i"></param>
+/// <param name="j"></param>
+/// <returns></returns>
 bool compare(const pair<int, int>&i, const pair<int, int>&j)
 {
 	return i.second > j.second;
@@ -16,13 +21,16 @@ SymbolFreq::SymbolFreq()
 
 }
 
-//counts all symbols
+/// <summary>
+/// Constructor, opens a file, counts and orders the characters
+/// </summary>
+/// <param name="name"></param>
 SymbolFreq::SymbolFreq(std::string name)
 {
 	std::vector<char>* temp = new std::vector<char>; //tempvector
 	std::map<char, int>* unorderedSymbols = new std::map<char, int>;
 
-	OpenFile(name, temp);
+	m_OpenFile(name, temp);
 
 	pairs = new std::vector<std::pair<char, int>>;
 
@@ -40,7 +48,7 @@ SymbolFreq::SymbolFreq(std::string name)
 		}
 	}
 
-	orderFrequencies(unorderedSymbols); //re-order the frequencies, descending second value
+	m_OrderFrequencies(unorderedSymbols); //re-order the frequencies, descending second value
 
 	delete unorderedSymbols;
 	delete temp;
@@ -53,13 +61,12 @@ SymbolFreq::~SymbolFreq()
 	delete pairs;
 }
 
-
 /// <summary>
 /// opens file at name and copies each char one by one into a vector
 /// </summary>
 /// <param name="name"></param>
 /// <param name="temp"></param>
-void SymbolFreq::OpenFile(string name, std::vector<char>* temp)
+void SymbolFreq::m_OpenFile(string name, std::vector<char>* temp)
 {
 	char ch; 
 
@@ -71,8 +78,11 @@ void SymbolFreq::OpenFile(string name, std::vector<char>* temp)
 	}
 }
 
-//Moves map into a vector<pair> and then sorts 
-void SymbolFreq::orderFrequencies(std::map<char, int>* unorderedSymbols)
+/// <summary>
+/// Orders all frequencies in vector from largest count to lowest, descending
+/// </summary>
+/// <param name="unorderedSymbols"></param>
+void SymbolFreq::m_OrderFrequencies(std::map<char, int>* unorderedSymbols)
 {
 	std::map<char, int>::iterator it;
 
@@ -85,7 +95,7 @@ void SymbolFreq::orderFrequencies(std::map<char, int>* unorderedSymbols)
 		pairs->push_back(*it); //add counted symbols to a vector of pairs
 	}
 
-	vbeg = pairs->begin();
+	vbeg = pairs->begin(); //strange error, had to explicitly set them to iterators, even thoguh they are
 	vend = pairs->end();
 
 	sort(vbeg, vend, compare); //sort symbols based on value, descending
@@ -93,19 +103,23 @@ void SymbolFreq::orderFrequencies(std::map<char, int>* unorderedSymbols)
 
 }
 
-//prints frequencies in order of frequency
+/// <summary>
+/// prints frequencies in order of frequency
+/// </summary>
 void SymbolFreq::PrintCharacterFreq()
 {
 	std::vector<std::pair<char, int>>::iterator it; //vector of pairs
 
-	//for (int i = 0; i < pairs.size(); ++i)
 	for(it = pairs->begin(); it != pairs->end(); ++it)
 	{
 		cout << it->first << "     " << it->second << endl;
 	}
 }
 
-//return vector of pairs for later use
+/// <summary>
+/// returns the symbols and their frequencies for alter use as a vector of pairs
+/// </summary>
+/// <returns></returns>
 std::vector<std::pair<char, int>>* SymbolFreq::getFrequencies()
 {
 	return pairs;
